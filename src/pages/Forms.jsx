@@ -132,7 +132,7 @@ export default function Forms({ onNavigate }) {
 
       <Reveal as="section" className="bg-[#f6f9fc] px-5 py-16 sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
         <div className="grid items-start gap-8 lg:grid-cols-[0.38fr_0.62fr]">
-          <aside className="sticky top-24 rounded-[2rem] bg-command p-7 text-white shadow-lift" aria-label="Form guidance">
+          <aside className="hidden rounded-[2rem] bg-command p-7 text-white shadow-lift lg:sticky lg:top-24 lg:block" aria-label="Form guidance">
             <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#71f0df]">Family guidance</p>
             <h2 className="text-4xl font-black leading-tight text-white">Choose the path that fits your family.</h2>
             <p className="mt-5 leading-7 text-white/75">
