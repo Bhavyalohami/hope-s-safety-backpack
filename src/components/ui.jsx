@@ -1,6 +1,7 @@
 import React from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { useInView } from "react-intersection-observer";
+import { withBasePath } from "../paths.js";
 
 const heroAlign = {
   left: "items-center text-left",
@@ -47,7 +48,7 @@ export function ButtonLink({ href, children, onNavigate, variant = "primary", ic
   return (
     <a
       className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border px-5 py-3 text-sm font-black leading-none transition ${variants[variant] || variants.primary}`}
-      href={href}
+      href={withBasePath(href)}
       onClick={(event) => {
         if (!onNavigate) return;
         event.preventDefault();
@@ -71,13 +72,13 @@ export function ResponsiveImage({
   priority = false,
   sizes = "(max-width: 720px) 92vw, 48vw",
 }) {
-  const webpSet = [smallWebp ? `${smallWebp} 720w` : null, webp ? `${webp} 1254w` : null].filter(Boolean).join(", ");
+  const webpSet = [smallWebp ? `${withBasePath(smallWebp)} 720w` : null, webp ? `${withBasePath(webp)} 1254w` : null].filter(Boolean).join(", ");
 
   return (
     <picture className={className}>
       {webpSet ? <source type="image/webp" srcSet={webpSet} sizes={sizes} /> : null}
       <img
-        src={src}
+        src={withBasePath(src)}
         alt={alt}
         loading={priority ? "eager" : loading}
         decoding="async"
@@ -131,7 +132,7 @@ export function Hero({
             sizes="100vw"
           />
         ) : (
-          <img className="h-full w-full object-cover" src={graphic} alt="" loading="eager" decoding="async" />
+          <img className="h-full w-full object-cover" src={withBasePath(graphic)} alt="" loading="eager" decoding="async" />
         )}
       </div>
       <div className={`absolute inset-0 -z-10 ${overlayClass}`} aria-hidden="true" />

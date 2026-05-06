@@ -1,5 +1,6 @@
 import { ArrowRight, Facebook, Instagram, Mail, MapPin, ShieldCheck, Youtube } from "lucide-react";
 import { site } from "../data.js";
+import { withBasePath } from "../paths.js";
 
 const socialLinks = [
   { label: "Instagram", href: "https://www.instagram.com/", icon: Instagram },
@@ -63,7 +64,7 @@ export function Footer({ onNavigate }) {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-safety-red to-safety-orange px-5 py-3 text-sm font-black text-white shadow-[0_16px_36px_rgb(215_25_32/0.26)] transition hover:-translate-y-0.5"
-                href="/forms"
+                href={withBasePath("/forms")}
                 onClick={go("/forms")}
               >
                 Request Information
@@ -71,7 +72,7 @@ export function Footer({ onNavigate }) {
               </a>
               <a
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/16 bg-white/8 px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-white/12"
-                href="/story"
+                href={withBasePath("/story")}
                 onClick={go("/story")}
               >
                 Read Hope's Story
@@ -97,7 +98,7 @@ export function Footer({ onNavigate }) {
       <section className="relative border-t border-white/10">
         <div className="mx-auto grid max-w-[1220px] gap-10 px-5 py-10 sm:px-6 lg:grid-cols-[1.05fr_1.2fr_auto] lg:px-8">
           <div>
-            <img className="w-48" src="/assets/brand-logo.svg" alt="Hope's Safety Backpack" width="190" height="79" loading="lazy" />
+            <img className="w-48" src={withBasePath("/assets/brand-logo.svg")} alt="Hope's Safety Backpack" width="190" height="79" loading="lazy" />
             <p className="mt-5 max-w-md leading-7 text-white/66">{site.description}</p>
             <p className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-white/58">
               <MapPin size={17} aria-hidden="true" />
@@ -113,7 +114,7 @@ export function Footer({ onNavigate }) {
                   {group.links.map(([label, href]) => (
                     <a
                       className="w-fit text-sm font-bold text-white/62 transition hover:text-white"
-                      href={href}
+                      href={withBasePath(href)}
                       key={label}
                       onClick={go(href)}
                     >

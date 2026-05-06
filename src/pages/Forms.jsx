@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FileText, Lock, Mail, Send, ShieldCheck, Siren } from "lucide-react";
 import { faqs } from "../data.js";
 import { ButtonLink, Hero, Reveal, SectionHeader } from "../components/ui.jsx";
+import { withBasePath } from "../paths.js";
 
 function InterestForm({ type }) {
   const [message, setMessage] = useState("");
@@ -180,7 +181,7 @@ export default function Forms({ onNavigate }) {
         <SectionHeader eyebrow="Supplied documents" title="Original files remain available for review." align="center" tone="dark" />
         <div className="grid gap-4 md:grid-cols-3">
           {downloads.map(({ href, type, label, icon: Icon }) => (
-            <a className="flex min-h-44 flex-col justify-center gap-3 rounded-[1.5rem] border border-white/10 bg-white/10 p-6 shadow-soft backdrop-blur transition hover:-translate-y-1 hover:bg-white/15 hover:shadow-lift" href={href} target="_blank" rel="noopener noreferrer" key={href}>
+            <a className="flex min-h-44 flex-col justify-center gap-3 rounded-[1.5rem] border border-white/10 bg-white/10 p-6 shadow-soft backdrop-blur transition hover:-translate-y-1 hover:bg-white/15 hover:shadow-lift" href={withBasePath(href)} target="_blank" rel="noopener noreferrer" key={href}>
               <Icon className="h-8 w-8 text-[#71f0df]" aria-hidden="true" />
               <span className="w-fit rounded-full bg-safety-red px-3 py-1 text-xs font-black text-white">{type}</span>
               <strong className="text-lg font-black text-white">{label}</strong>

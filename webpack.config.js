@@ -1,18 +1,23 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import webpack from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export default {
+export default (env = {}) => {
+  const publicPath = env.githubPages ? "/hope-s-safety-backpack/" : process.env.PUBLIC_PATH || "/";
+  const basePath = publicPath === "/" ? "" : publicPath.replace(/\/+$/, "");
+
+  return {
   entry: path.resolve(__dirname, "src/main.jsx"),
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "assets/[name].[contenthash].js",
     clean: true,
-    publicPath: "/",
+    publicPath,
   },
   resolve: {
     extensions: [".js", ".jsx"],
@@ -39,8 +44,14 @@ export default {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      __BASE_PATH__: JSON.stringify(publicPath),
+    }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "index.html"),
+      templateParameters: {
+        basePath,
+      },
     }),
     new CopyWebpackPlugin({
       patterns: [
@@ -86,4 +97,5 @@ export default {
   performance: {
     hints: false,
   },
+  };
 };

@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useCallback, useEffect, useMemo, useState } from
 import { Footer } from "./components/Footer.jsx";
 import { Header } from "./components/Header.jsx";
 import { SEO } from "./components/SEO.jsx";
+import { withBasePath, withoutBasePath } from "./paths.js";
 
 const Home = lazy(() => import("./pages/Home.jsx"));
 const Features = lazy(() => import("./pages/Features.jsx"));
@@ -37,18 +38,19 @@ function PageLoader() {
 }
 
 export default function App() {
-  const [currentPath, setCurrentPath] = useState(() => normalizePath(window.location.pathname));
+  const [currentPath, setCurrentPath] = useState(() => normalizePath(withoutBasePath(window.location.pathname)));
 
   useEffect(() => {
-    const handlePopState = () => setCurrentPath(normalizePath(window.location.pathname));
+    const handlePopState = () => setCurrentPath(normalizePath(withoutBasePath(window.location.pathname)));
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
   const navigate = useCallback((path) => {
     const nextPath = normalizePath(path);
-    if (window.location.pathname !== nextPath) {
-      window.history.pushState({}, "", nextPath);
+    const browserPath = withBasePath(nextPath);
+    if (window.location.pathname !== browserPath) {
+      window.history.pushState({}, "", browserPath);
     }
     setCurrentPath(nextPath);
     window.scrollTo({ top: 0, behavior: "smooth" });
