@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 228 96" role="img" aria-labelledby="brandTitle brandDesc">
+  <title id="brandTitle">HSP logo</title>
+  <desc id="brandDesc">Compact futuristic logo for Hope's Safety Backpack.</desc>
+  <defs>
+    <linearGradient id="shield" x1="18" y1="12" x2="82" y2="86" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#64d7ff"/>
+      <stop offset=".5" stop-color="#1258d6"/>
+      <stop offset="1" stop-color="#06133a"/>
+    </linearGradient>
+    <linearGradient id="word" x1="90" y1="28" x2="190" y2="72" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".62" stop-color="#9ee9ff"/>
+      <stop offset="1" stop-color="#f54e00"/>
+    </linearGradient>
+    <filter id="glow" x="-35%" y="-35%" width="170%" height="170%">
+      <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#64d7ff" flood-opacity=".36"/>
+    </filter>
+  </defs>
+  <rect x="2" y="2" width="224" height="92" rx="18" fill="#020817"/>
+  <path d="M15 82C69 23 129 10 213 18" fill="none" stroke="#64d7ff" stroke-opacity=".3" stroke-width="2"/>
+  <path d="M14 18c40 16 75 18 111 8 27-8 55-7 89 7" fill="none" stroke="#d41225" stroke-opacity=".5" stroke-width="4" stroke-linecap="round"/>
+  <rect x="2" y="2" width="224" height="92" rx="18" fill="none" stroke="#64d7ff" stroke-opacity=".42" stroke-width="2"/>
+  <g filter="url(#glow)">
+    <path d="M52 13c17 11 34 12 47 12v30c0 25-19 44-47 56C24 99 5 80 5 55V25c13 0 30-1 47-12Z" transform="translate(17 -4) scale(.78)" fill="url(#shield)"/>
+    <path d="M51 39c0-15 9-25 21-25s21 10 21 25v31H51V39Z" transform="translate(17 10) scale(.78)" fill="#06133a" stroke="#fff" stroke-width="5"/>
+    <path d="M62 38c0-8 4-14 10-14s10 6 10 14" transform="translate(17 10) scale(.78)" fill="none" stroke="#64d7ff" stroke-width="5" stroke-linecap="round"/>
+    <rect x="66" y="57" width="21" height="16" rx="5" fill="#d41225"/>
+    <path d="m76.5 49 3.4 10h10.8l-8.7 6.4 3.3 10-8.8-6.2-8.8 6.2 3.3-10-8.7-6.4h10.8l3.4-10Z" fill="#fff"/>
+  </g>
+  <text x="96" y="55" fill="url(#word)" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="42" font-weight="900">HSP</text>
+  <text x="98" y="73" fill="#f2f1ed" font-family="Consolas, 'Courier New', monospace" font-size="10" font-weight="700" letter-spacing="1.8">SAFETY PACK</text>
+  <circle cx="199" cy="30" r="5" fill="#f54e00"/>
+  <circle cx="210" cy="30" r="3" fill="#64d7ff"/>
+</svg>
