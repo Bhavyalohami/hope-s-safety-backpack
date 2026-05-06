@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">Hope's Safety Backpack symbol</title>
+  <defs>
+    <linearGradient id="logoBlue" x1="18" y1="11" x2="80" y2="87" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6ee7ff"/>
+      <stop offset=".48" stop-color="#1258d6"/>
+      <stop offset="1" stop-color="#06133a"/>
+    </linearGradient>
+    <linearGradient id="logoRed" x1="24" y1="20" x2="76" y2="82" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff4a5f"/>
+      <stop offset="1" stop-color="#b80f22"/>
+    </linearGradient>
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <circle cx="48" cy="48" r="44" fill="#f8fbff"/>
+  <circle cx="48" cy="48" r="40" fill="#06133a"/>
+  <path d="M48 14c12 8 24 9 32 9v24c0 20-13 31-32 39-19-8-32-19-32-39V23c8 0 20-1 32-9Z" fill="url(#logoBlue)"/>
+  <path d="M30 42c0-11 8-19 18-19s18 8 18 19v26c0 4-3 7-7 7H37c-4 0-7-3-7-7V42Z" fill="#07133b" stroke="#9ee9ff" stroke-width="3"/>
+  <path d="M38 40c0-7 4-11 10-11s10 4 10 11" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round"/>
+  <path d="M36 51h24" stroke="#64d7ff" stroke-width="3" stroke-linecap="round"/>
+  <path d="M36 62h24" stroke="#64d7ff" stroke-width="3" stroke-linecap="round"/>
+  <rect x="40" y="47" width="16" height="14" rx="4" fill="url(#logoRed)" filter="url(#softGlow)"/>
+  <path d="m48 43 2.2 6.5h6.8l-5.5 4 2.1 6.5-5.6-4-5.6 4 2.1-6.5-5.5-4h6.8L48 43Z" fill="#fff"/>
+  <path d="M20 30c12 4 18 4 28 0 10 4 16 4 28 0" fill="none" stroke="#d41225" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+</svg>

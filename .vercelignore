@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.git/
+.vercel/
+.env
+.env.*
+
+*.log
+dom-dump.html
+preview-*.png
+react-preview-*.png
+verification-*.png
+webpack-preview-*.png
+
+assets/*.png
+static-backup/

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 560">
+  <rect width="760" height="560" rx="42" fill="#f4f9ff"/>
+  <circle cx="380" cy="280" r="118" fill="#06133a"/>
+  <path d="M380 160c30 20 60 22 82 22v74c0 63-41 101-82 120-41-19-82-57-82-120v-74c22 0 52-2 82-22Z" fill="#1258d6"/>
+  <path d="M330 278c0-32 21-56 50-56s50 24 50 56v70h-100v-70Z" fill="#06133a" stroke="#fff" stroke-width="5"/>
+  <path d="M355 274c0-16 9-27 25-27s25 11 25 27" fill="none" stroke="#64d7ff" stroke-width="6" stroke-linecap="round"/>
+  <g stroke="#64d7ff" stroke-width="5" stroke-linecap="round">
+    <path d="M278 236l-102-62M482 236l102-62M278 324l-106 64M482 324l106 64M380 398v88"/>
+  </g>
+  <g fill="#fff" stroke="#1258d6" stroke-width="5">
+    <circle cx="150" cy="160" r="58"/><circle cx="610" cy="160" r="58"/>
+    <circle cx="150" cy="400" r="58"/><circle cx="610" cy="400" r="58"/>
+    <circle cx="380" cy="498" r="42"/>
+  </g>
+  <g fill="none" stroke="#06133a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M130 162h40m-20-20v40"/>
+    <path d="M590 178c9 8 31 8 40 0 8-8 8-20 0-28-9-8-31-8-40 0-8 8-8 20 0 28Z"/>
+    <path d="M126 398h48M150 374v48"/>
+    <path d="M590 414l20-44 20 44"/>
+    <path d="M366 498h28"/>
+  </g>
+</svg>

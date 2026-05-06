@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+@source "../index.html";
+@source "./**/*.{js,jsx}";
+
+@theme {
+  --font-sans: Arial, Helvetica, sans-serif;
+  --color-ink: #111827;
+  --color-body: #263241;
+  --color-muted: #647284;
+  --color-safety-red: #d71920;
+  --color-safety-orange: #f15a24;
+  --color-command: #0c1425;
+  --color-command-2: #172238;
+  --color-safety-blue: #155eef;
+  --color-safety-teal: #008c82;
+  --color-safety-gold: #f7b500;
+  --shadow-soft: 0 12px 36px rgba(12, 20, 37, 0.09);
+  --shadow-lift: 0 24px 70px rgba(12, 20, 37, 0.14);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    background: #f7fafc;
+    color: #263241;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  img,
+  picture,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  img {
+    height: auto;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  summary {
+    outline-offset: 4px;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  summary:focus-visible {
+    outline: 3px solid rgb(21 94 239 / 0.35);
+  }
+
+  details[open] summary {
+    border-bottom: 1px solid rgb(17 24 39 / 0.1);
+  }
+}
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 520ms ease, transform 520ms ease;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .story-mask-left {
+    mask-image: linear-gradient(90deg, #000 0 70%, transparent 100%);
+  }
+
+  .story-mask-right {
+    mask-image: linear-gradient(270deg, #000 0 70%, transparent 100%);
+  }
+
+  .hero-vignette {
+    background:
+      radial-gradient(circle at 75% 18%, rgb(0 140 130 / 0.22), transparent 28rem),
+      linear-gradient(90deg, rgb(12 20 37 / 0.92), rgb(12 20 37 / 0.58) 46%, rgb(12 20 37 / 0.18));
+  }
+
+  .hero-vignette-right {
+    background:
+      radial-gradient(circle at 20% 22%, rgb(247 181 0 / 0.2), transparent 24rem),
+      linear-gradient(270deg, rgb(12 20 37 / 0.92), rgb(12 20 37 / 0.56) 46%, rgb(12 20 37 / 0.12));
+  }
+
+  .hero-vignette-center {
+    background:
+      radial-gradient(circle at 50% 22%, rgb(21 94 239 / 0.3), transparent 22rem),
+      linear-gradient(180deg, rgb(12 20 37 / 0.42), rgb(12 20 37 / 0.9));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+}
