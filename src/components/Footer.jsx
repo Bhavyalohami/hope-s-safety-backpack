@@ -1,6 +1,6 @@
 import { ArrowRight, Facebook, Instagram, Mail, MapPin, ShieldCheck, Youtube } from "lucide-react";
 import { site } from "../data.js";
-import { withBasePath } from "../paths.js";
+import { withBasePath, withRoutePath } from "../paths.js";
 
 const socialLinks = [
   { label: "Instagram", href: "https://www.instagram.com/", icon: Instagram },
@@ -64,7 +64,7 @@ export function Footer({ onNavigate }) {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-safety-red to-safety-orange px-5 py-3 text-sm font-black text-white shadow-[0_16px_36px_rgb(215_25_32/0.26)] transition hover:-translate-y-0.5"
-                href={withBasePath("/forms")}
+                href={withRoutePath("/forms")}
                 onClick={go("/forms")}
               >
                 Request Information
@@ -72,7 +72,7 @@ export function Footer({ onNavigate }) {
               </a>
               <a
                 className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/16 bg-white/8 px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-white/12"
-                href={withBasePath("/story")}
+                href={withRoutePath("/story")}
                 onClick={go("/story")}
               >
                 Read Hope's Story
@@ -114,7 +114,7 @@ export function Footer({ onNavigate }) {
                   {group.links.map(([label, href]) => (
                     <a
                       className="w-fit text-sm font-bold text-white/62 transition hover:text-white"
-                      href={withBasePath(href)}
+                      href={withRoutePath(href)}
                       key={label}
                       onClick={go(href)}
                     >

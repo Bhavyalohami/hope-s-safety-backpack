@@ -2,7 +2,7 @@ import React, { lazy, Suspense, useCallback, useEffect, useMemo, useState } from
 import { Footer } from "./components/Footer.jsx";
 import { Header } from "./components/Header.jsx";
 import { SEO } from "./components/SEO.jsx";
-import { withBasePath, withoutBasePath } from "./paths.js";
+import { getCurrentRoutePath, withRoutePath } from "./paths.js";
 
 const Home = lazy(() => import("./pages/Home.jsx"));
 const Features = lazy(() => import("./pages/Features.jsx"));
@@ -38,18 +38,23 @@ function PageLoader() {
 }
 
 export default function App() {
-  const [currentPath, setCurrentPath] = useState(() => normalizePath(withoutBasePath(window.location.pathname)));
+  const [currentPath, setCurrentPath] = useState(() => normalizePath(getCurrentRoutePath()));
 
   useEffect(() => {
-    const handlePopState = () => setCurrentPath(normalizePath(withoutBasePath(window.location.pathname)));
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
+    const handleRouteChange = () => setCurrentPath(normalizePath(getCurrentRoutePath()));
+    window.addEventListener("hashchange", handleRouteChange);
+    window.addEventListener("popstate", handleRouteChange);
+    return () => {
+      window.removeEventListener("hashchange", handleRouteChange);
+      window.removeEventListener("popstate", handleRouteChange);
+    };
   }, []);
 
   const navigate = useCallback((path) => {
     const nextPath = normalizePath(path);
-    const browserPath = withBasePath(nextPath);
-    if (window.location.pathname !== browserPath) {
+    const browserPath = withRoutePath(nextPath);
+    const currentBrowserPath = `${window.location.pathname}${window.location.hash}`;
+    if (currentBrowserPath !== browserPath) {
       window.history.pushState({}, "", browserPath);
     }
     setCurrentPath(nextPath);

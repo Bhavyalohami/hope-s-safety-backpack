@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { routes } from "../data.js";
-import { withBasePath } from "../paths.js";
+import { withBasePath, withRoutePath } from "../paths.js";
 
 const navRoutes = routes.filter((route) => !route.cta);
 const ctaRoute = routes.find((route) => route.cta);
@@ -26,7 +26,7 @@ export function Header({ currentPath, onNavigate }) {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#07111f]/94 text-white shadow-[0_18px_48px_rgb(7_17_31/0.32)] backdrop-blur-xl">
       <div className="mx-auto flex min-h-[78px] max-w-[1220px] items-center justify-between gap-5 px-4 sm:px-6 lg:px-8">
-        <a className="group flex items-center gap-3" href={withBasePath("/")} onClick={go("/")} aria-label="Hope's Safety Backpack home">
+        <a className="group flex items-center gap-3" href={withRoutePath("/")} onClick={go("/")} aria-label="Hope's Safety Backpack home">
           <span className="grid h-13 w-14 place-items-center overflow-hidden rounded-full border border-white/12 bg-white/8 shadow-[0_16px_32px_rgb(0_0_0/0.2)] transition group-hover:-translate-y-0.5">
             <img className="h-11 w-[30px] scale-[1.45]" src={withBasePath("/assets/logo-mark.svg")} alt="" width="56" height="56" />
           </span>
@@ -42,7 +42,7 @@ export function Header({ currentPath, onNavigate }) {
             return (
               <a
                 key={route.path}
-                href={withBasePath(route.path)}
+                href={withRoutePath(route.path)}
                 className={`relative inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-black transition ${
                   active ? "text-white" : "text-white/64 hover:bg-white/8 hover:text-white"
                 }`}
@@ -64,7 +64,7 @@ export function Header({ currentPath, onNavigate }) {
           {ctaRoute ? (
             <a
               className="inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-safety-red to-safety-orange px-6 py-2 text-sm font-black text-white shadow-[0_16px_36px_rgb(215_25_32/0.28)] transition hover:-translate-y-0.5"
-              href={withBasePath(ctaRoute.path)}
+              href={withRoutePath(ctaRoute.path)}
               onClick={go(ctaRoute.path)}
             >
               Request Info
@@ -95,7 +95,7 @@ export function Header({ currentPath, onNavigate }) {
           return (
             <a
               key={route.path}
-              href={withBasePath(route.path)}
+              href={withRoutePath(route.path)}
               className={`flex min-h-12 items-center justify-between rounded-2xl px-4 text-lg font-black ${
                 active ? "bg-white text-command" : "text-white/76 hover:bg-white/8 hover:text-white"
               }`}
@@ -110,7 +110,7 @@ export function Header({ currentPath, onNavigate }) {
         {ctaRoute ? (
           <a
             className="mt-2 inline-flex min-h-13 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-safety-red to-safety-orange px-4 py-3 text-lg font-black text-white"
-            href={withBasePath(ctaRoute.path)}
+            href={withRoutePath(ctaRoute.path)}
             onClick={go(ctaRoute.path)}
           >
             {ctaRoute.label}

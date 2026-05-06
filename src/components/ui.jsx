@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { useInView } from "react-intersection-observer";
-import { withBasePath } from "../paths.js";
+import { withBasePath, withRoutePath } from "../paths.js";
 
 const heroAlign = {
   left: "items-center text-left",
@@ -48,7 +48,7 @@ export function ButtonLink({ href, children, onNavigate, variant = "primary", ic
   return (
     <a
       className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border px-5 py-3 text-sm font-black leading-none transition ${variants[variant] || variants.primary}`}
-      href={withBasePath(href)}
+      href={withRoutePath(href)}
       onClick={(event) => {
         if (!onNavigate) return;
         event.preventDefault();
