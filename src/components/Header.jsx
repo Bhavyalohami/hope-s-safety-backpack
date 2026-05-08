@@ -24,19 +24,19 @@ export function Header({ currentPath, onNavigate }) {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#07111f]/94 text-white shadow-[0_18px_48px_rgb(7_17_31/0.32)] backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b-4 border-dashed border-safety-gold/45 bg-[#fffaf0]/95 text-command shadow-[0_16px_40px_rgb(12_20_37/0.14)] backdrop-blur-xl">
       <div className="mx-auto flex min-h-[78px] max-w-[1220px] items-center justify-between gap-5 px-4 sm:px-6 lg:px-8">
         <a className="group flex items-center gap-3" href={withRoutePath("/")} onClick={go("/")} aria-label="Hope's Safety Backpack home">
-          <span className="grid h-13 w-14 place-items-center overflow-hidden rounded-full border border-white/12 bg-white/8 shadow-[0_16px_32px_rgb(0_0_0/0.2)] transition group-hover:-translate-y-0.5">
-            <img className="h-11 w-[30px] scale-[1.45]" src={withBasePath("/assets/logo-mark.svg")} alt="" width="56" height="56" />
+          <span className="grid h-14 w-14 place-items-center overflow-hidden rounded-full border-2 border-command/10 bg-white shadow-[0_8px_0_rgb(12_20_37/0.1)] transition group-hover:-translate-y-0.5">
+            <img className="h-12 w-12" src={withBasePath("/assets/logo-mark.svg")} alt="" width="56" height="56" />
           </span>
           <span className="hidden sm:block">
-            <span className="block text-sm font-black uppercase leading-none tracking-normal">Hope's Safety</span>
-            <span className="mt-1 block text-xs font-bold uppercase tracking-normal text-white/55">Backpack</span>
+            <span className="block text-sm font-black uppercase leading-none tracking-normal text-command">Hope's Safety</span>
+            <span className="mt-1 block text-xs font-bold uppercase tracking-normal text-safety-red">Backpack idea board</span>
           </span>
         </a>
 
-        <nav className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/6 px-2 py-1.5 lg:flex" aria-label="Main navigation">
+        <nav className="hidden items-center gap-1 rounded-full border-2 border-command/10 bg-white px-2 py-1.5 shadow-soft lg:flex" aria-label="Main navigation">
           {navRoutes.map((route) => {
             const active = currentPath === route.path;
             return (
@@ -44,7 +44,7 @@ export function Header({ currentPath, onNavigate }) {
                 key={route.path}
                 href={withRoutePath(route.path)}
                 className={`relative inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-black transition ${
-                  active ? "text-white" : "text-white/64 hover:bg-white/8 hover:text-white"
+                  active ? "bg-yellow-100 text-command" : "text-body hover:bg-cyan-50 hover:text-command"
                 }`}
                 aria-current={active ? "page" : undefined}
                 onClick={go(route.path)}
@@ -63,7 +63,7 @@ export function Header({ currentPath, onNavigate }) {
           </span> */}
           {ctaRoute ? (
             <a
-              className="inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-safety-red to-safety-orange px-6 py-2 text-sm font-black text-white shadow-[0_16px_36px_rgb(215_25_32/0.28)] transition hover:-translate-y-0.5"
+              className="inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-full border-2 border-command bg-gradient-to-r from-safety-blue via-safety-teal to-safety-orange px-6 py-2 text-sm font-black text-white shadow-[0_8px_0_rgb(12_20_37/0.16)] transition hover:-translate-y-0.5"
               href={withRoutePath(ctaRoute.path)}
               onClick={go(ctaRoute.path)}
             >
@@ -74,7 +74,7 @@ export function Header({ currentPath, onNavigate }) {
         </div>
 
         <button
-          className="inline-grid h-12 w-12 place-items-center rounded-2xl border border-white/12 bg-white/8 text-white shadow-[0_16px_32px_rgb(0_0_0/0.22)] lg:hidden"
+          className="inline-grid h-12 w-12 place-items-center rounded-2xl border-2 border-command/10 bg-white text-command shadow-[0_8px_0_rgb(12_20_37/0.1)] lg:hidden"
           type="button"
           aria-controls="site-navigation-mobile"
           aria-expanded={open}
@@ -87,7 +87,7 @@ export function Header({ currentPath, onNavigate }) {
 
       <nav
         id="site-navigation-mobile"
-        className={`${open ? "grid" : "hidden"} mx-4 mb-4 gap-2 rounded-[1.5rem] border border-white/10 bg-[#0b1728] p-3 shadow-lift lg:hidden`}
+        className={`${open ? "grid" : "hidden"} mx-4 mb-4 gap-2 rounded-[1.5rem] border-2 border-command/10 bg-white p-3 shadow-lift lg:hidden`}
         aria-label="Mobile navigation"
       >
         {navRoutes.map((route) => {
@@ -97,7 +97,7 @@ export function Header({ currentPath, onNavigate }) {
               key={route.path}
               href={withRoutePath(route.path)}
               className={`flex min-h-12 items-center justify-between rounded-2xl px-4 text-lg font-black ${
-                active ? "bg-white text-command" : "text-white/76 hover:bg-white/8 hover:text-white"
+                active ? "bg-yellow-100 text-command" : "text-body hover:bg-cyan-50 hover:text-command"
               }`}
               aria-current={active ? "page" : undefined}
               onClick={go(route.path)}
@@ -109,7 +109,7 @@ export function Header({ currentPath, onNavigate }) {
         })}
         {ctaRoute ? (
           <a
-            className="mt-2 inline-flex min-h-13 items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-safety-red to-safety-orange px-4 py-3 text-lg font-black text-white"
+            className="mt-2 inline-flex min-h-13 items-center justify-center gap-2 rounded-2xl border-2 border-command bg-gradient-to-r from-safety-red to-safety-orange px-4 py-3 text-lg font-black text-white shadow-[0_8px_0_rgb(12_20_37/0.12)]"
             href={withRoutePath(ctaRoute.path)}
             onClick={go(ctaRoute.path)}
           >

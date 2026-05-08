@@ -72,7 +72,12 @@ function buildSchema(path, meta) {
 
 export function SEO({ path }) {
   useEffect(() => {
-    const cleanPath = path === "/page-two" ? "/forms" : path;
+    const aliases = {
+      "/page-two": "/forms",
+      "/financial": "/ambassadors",
+      "/sales-agenda": "/helper-team",
+    };
+    const cleanPath = aliases[path] || path;
     const meta = routeMeta[cleanPath] || routeMeta["/"];
     const canonical = `${site.url}${cleanPath === "/" ? "" : cleanPath}`;
     const imageUrl = `${site.url}${site.ogImage}`;

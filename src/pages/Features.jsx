@@ -12,7 +12,7 @@ import {
   Zap,
 } from "lucide-react";
 import { safetyFeatures } from "../data.js";
-import { ButtonLink, CardGrid, CTASection, Hero, ResponsiveImage, Reveal, SectionHeader } from "../components/ui.jsx";
+import { ButtonLink, CardGrid, CTASection, Hero, Reveal, SectionHeader } from "../components/ui.jsx";
 
 const icons = [Camera, Zap, BatteryCharging, Cross, Waves, MapPin, Flashlight, Shield];
 const featureCards = safetyFeatures.map(([title, text], index) => ({ title, text, icon: icons[index] }));
@@ -20,58 +20,65 @@ const featureCards = safetyFeatures.map(([title, text], index) => ({ title, text
 const layers = [
   {
     icon: Radar,
-    title: "Awareness layer",
-    text: "Camera, GPS, panic, and visibility concepts support a clearer sense of where help may be needed.",
+    title: "Look-out layer",
+    text: "Camera, GPS, panic, and visibility ideas help the backpack tell a clearer safety story.",
   },
   {
     icon: Layers3,
-    title: "Readiness layer",
-    text: "Charging, flashlight, first aid, masks, and sanitizer keep everyday emergency tools organized.",
+    title: "Ready layer",
+    text: "Charging, flashlight, first aid, masks, and sanitizer keep helpful tools together.",
   },
   {
     icon: Shield,
-    title: "Protection layer",
-    text: "Protective materials and thoughtful compartments create a stronger safety narrative.",
+    title: "Brave layer",
+    text: "Protective materials and thoughtful compartments make the idea feel prepared.",
   },
   {
     icon: BellRing,
-    title: "Response layer",
-    text: "Lighting, panic cues, and clear placement help the product story focus on fast action.",
+    title: "Help layer",
+    text: "Lighting, panic cues, and clear placement help kids and families understand what happens next.",
   },
+];
+
+const sketchCards = [
+  ["1", "Bright lights", "So cars and grown-ups can see me better."],
+  ["2", "Care kit", "So helpful supplies are not forgotten."],
+  ["3", "Find-me support", "So families have another way to feel calm."],
+  ["4", "Safety club", "So being careful can also mean being kind."],
 ];
 
 export default function Features({ onNavigate }) {
   return (
     <main>
       <Hero
-        eyebrow="Backpack safety feature system"
-        title="Product Features"
-        text="Hope's Safety Backpack combines visibility, awareness, emergency readiness, and student confidence into one concept families can understand at a glance."
+        eyebrow="Hope's feature idea map"
+        title="Backpack Feature Map"
+        text="Hope's Safety Backpack combines bright visibility, helpful supplies, family support, and student confidence into one colorful map families can understand at a glance."
         image={{
           src: "/assets/features-tech-hero.webp",
           webp: "/assets/features-tech-hero.webp",
         }}
-        imageAlt="Exploded view of safety backpack technology modules"
+        imageAlt="Colorful feature map for Hope's Safety Backpack"
         align="center"
         overlay="center"
-        kicker="Feature map"
-        chips={["Awareness", "Readiness", "Protection", "Response"]}
+        kicker="Kid inventor notes"
+        chips={["Bright", "Ready", "Brave", "Kind"]}
       />
 
-      <Reveal as="section" className="bg-command px-5 py-16 text-white sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
+      <Reveal as="section" className="bg-gradient-to-br from-safety-blue via-safety-teal to-safety-orange px-5 py-16 text-white sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <SectionHeader
             eyebrow="School-day moments"
-            title="The features are built around when students need support most."
-            text="Arrival, dismissal, travel, and uncertain moments each ask for a different kind of safety cue. This page groups the backpack around those needs."
+            title="The features are built around moments kids can picture."
+            text="Arrival, dismissal, travel, and uncertain moments each ask for a different kind of safety cue. This page explains the backpack in kid-clear language."
             tone="dark"
           />
           <div className="grid gap-3 sm:grid-cols-2">
             {[
-              ["Morning arrival", "Bright LED visibility and quick-access supplies help the day start with more confidence."],
-              ["Between classes", "Organized compartments make readiness feel normal instead of scattered."],
-              ["After-school travel", "GPS support, lighting, and awareness cues are centered on the trip home."],
-              ["Unexpected moments", "Panic cues, first aid, flashlight support, and protective thinking stay within reach."],
+              ["Morning arrival", "Bright lights help students stand out when the day begins."],
+              ["Between classes", "Organized pockets make safety supplies feel easy to find."],
+              ["After-school travel", "GPS support, lighting, and awareness cues focus on getting home."],
+              ["Unexpected moments", "Panic cues, first aid, and flashlight support stay easy to explain."],
             ].map(([title, text], index) => (
               <article className="rounded-[1.35rem] border border-white/10 bg-white/10 p-6 shadow-soft backdrop-blur" key={title}>
                 <span className="mb-5 inline-grid h-10 w-10 place-items-center rounded-full bg-white text-command text-sm font-black">{index + 1}</span>
@@ -85,40 +92,54 @@ export default function Features({ onNavigate }) {
 
       <Reveal as="section" className="mx-auto max-w-[1224px] px-5 py-16 sm:px-8 lg:py-24">
         <SectionHeader
-          eyebrow="Feature matrix"
-          title="Eight safety signals, easy to compare."
-          text="The feature set is organized into clear jobs: help students be seen, stay prepared, receive family support, and understand the safety purpose quickly."
+            eyebrow="Sticker map"
+            title="Eight safety signals, easy for families to compare."
+          text="Each idea has one easy job: help students be seen, stay prepared, feel supported, or understand what to do next."
           align="center"
         />
         <CardGrid items={featureCards} columns="four" />
       </Reveal>
 
-      <Reveal as="section" className="bg-gradient-to-br from-slate-950 via-command to-teal-950 px-5 py-16 text-white sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
+      <Reveal as="section" className="bg-[#fff7ed] px-5 py-16 text-command sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
         <div className="grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <SectionHeader
-              eyebrow="Component layers"
-              title="A layered system families can follow quickly."
-              text="Every feature has a plain-language purpose and a place in the broader safety system, helping parents and schools understand the backpack without guesswork."
-              tone="dark"
+              eyebrow="Backpack layers"
+              title="A layered idea families can follow quickly."
+              text="Every feature has a plain-language purpose, helping parents and schools understand the backpack without guesswork."
             />
-            <CardGrid items={layers} columns="two" tone="dark" />
+            <CardGrid items={layers} columns="two" />
           </div>
-          <figure className="max-h-[760px] overflow-hidden rounded-[2rem] border border-white/15 bg-white p-2 shadow-lift">
-            <ResponsiveImage
-              src="/assets/description-and-weight.webp"
-              webp="/assets/description-and-weight.webp"
-              smallWebp="/assets/description-and-weight-720.webp"
-              alt="Detailed description and weight breakdown for Hope's Safety Backpack"
-              imageClassName="max-h-[760px] w-full rounded-[1.45rem] object-contain"
-              sizes="(max-width: 720px) 92vw, 40vw"
-            />
-          </figure>
+          <div className="rounded-[2rem] border-4 border-dashed border-safety-blue/50 bg-white p-5 shadow-lift" aria-label="Feature sketch cards">
+            <p className="mb-5 w-fit rotate-1 rounded-lg bg-safety-gold px-4 py-2 text-sm font-black uppercase text-command shadow-soft">Hope's sketch notes</p>
+            <div className="grid gap-3">
+              {sketchCards.map(([number, title, text], index) => (
+                <article
+                  className={`flex gap-4 rounded-[1.25rem] border-2 border-command/10 p-5 shadow-soft ${
+                    index === 0
+                      ? "bg-cyan-100"
+                      : index === 1
+                        ? "bg-yellow-100"
+                        : index === 2
+                          ? "bg-red-100"
+                          : "bg-green-100"
+                  }`}
+                  key={title}
+                >
+                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-white text-xl font-black text-command">{number}</span>
+                  <div>
+                    <h3 className="text-xl font-black text-command">{title}</h3>
+                    <p className="mt-1 text-lg font-extrabold leading-7 text-body">{text}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
       </Reveal>
 
       <Reveal as="section" className="mx-auto max-w-[1224px] px-5 py-16 sm:px-8 lg:py-24">
-        <SectionHeader eyebrow="Why it matters" title="Normal backpack vs. safety backpack thinking." align="center" />
+        <SectionHeader eyebrow="Why it matters" title="Normal backpack vs. Hope's safety backpack thinking." align="center" />
         <div className="grid gap-4 md:grid-cols-2">
           <article className="rounded-[1.5rem] border border-slate-200 bg-white p-7 shadow-soft">
             <span className="mb-4 inline-grid rounded-full bg-safety-red px-3 py-1 text-xs font-black uppercase text-white">Typical backpack</span>
@@ -127,8 +148,8 @@ export default function Features({ onNavigate }) {
           </article>
           <article className="rounded-[1.5rem] border border-safety-teal/30 bg-gradient-to-br from-white to-teal-50 p-7 shadow-soft">
             <span className="mb-4 inline-grid rounded-full bg-safety-teal px-3 py-1 text-xs font-black uppercase text-white">Hope's concept</span>
-            <h3 className="text-xl font-black text-ink">Readiness first</h3>
-            <p className="mt-3 leading-7 text-muted">The concept places safety signals, supplies, visibility, and support systems directly into the backpack story.</p>
+            <h3 className="text-xl font-black text-ink">Safety kids can explain</h3>
+            <p className="mt-3 leading-7 text-muted">The concept places bright signals, helpful supplies, visibility, and support systems directly into the backpack story.</p>
           </article>
         </div>
       </Reveal>
@@ -136,7 +157,7 @@ export default function Features({ onNavigate }) {
       <CTASection
         eyebrow="Next step"
         title="Give families a clear path after they understand the features."
-        text="Visitors who understand the product can move directly into applications, preorder interest, or document review."
+        text="Families who understand the idea can move directly into applications, preorder interest, or document review."
       >
         <ButtonLink href="/forms" onNavigate={onNavigate}>
           Review Forms

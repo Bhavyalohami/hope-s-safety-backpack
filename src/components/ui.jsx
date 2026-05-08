@@ -36,18 +36,18 @@ export function Reveal({ as: Tag = "div", className = "", delay = 0, children })
 export function ButtonLink({ href, children, onNavigate, variant = "primary", icon: Icon = ArrowRight }) {
   const variants = {
     primary:
-      "border-transparent bg-gradient-to-r from-safety-red to-safety-orange text-white shadow-[0_14px_34px_rgb(215_25_32/0.24)] hover:-translate-y-0.5 hover:shadow-lift",
+      "border-command bg-gradient-to-r from-safety-red via-safety-orange to-safety-gold text-white shadow-[0_8px_0_rgb(12_20_37/0.18)] hover:-translate-y-1 hover:shadow-lift",
     secondary:
-      "border-slate-200 bg-white text-ink shadow-soft hover:-translate-y-0.5 hover:shadow-lift",
+      "border-command bg-white text-command shadow-[0_8px_0_rgb(12_20_37/0.12)] hover:-translate-y-1 hover:shadow-lift",
     ghost:
-      "border-white/30 bg-white/10 text-white backdrop-blur hover:-translate-y-0.5 hover:bg-white/20",
+      "border-white/60 bg-white/20 text-white backdrop-blur hover:-translate-y-1 hover:bg-white/30",
     dark:
-      "border-transparent bg-command text-white shadow-soft hover:-translate-y-0.5 hover:shadow-lift",
+      "border-command bg-command text-white shadow-[0_8px_0_rgb(12_20_37/0.16)] hover:-translate-y-1 hover:shadow-lift",
   };
 
   return (
     <a
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border px-5 py-3 text-sm font-black leading-none transition ${variants[variant] || variants.primary}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 px-5 py-3 text-sm font-black leading-none transition ${variants[variant] || variants.primary}`}
       href={withRoutePath(href)}
       onClick={(event) => {
         if (!onNavigate) return;
@@ -93,7 +93,7 @@ export function SectionHeader({ eyebrow, title, text, align = "left", tone = "li
   const dark = tone === "dark";
   return (
     <div className={`${align === "center" ? "mx-auto text-center" : ""} mb-8 max-w-4xl`}>
-      <p className={`mb-3 text-xs font-black uppercase tracking-normal ${dark ? "text-[#71f0df]" : "text-safety-red"}`}>{eyebrow}</p>
+      <p className={`mb-3 inline-flex -rotate-1 rounded-xl border-2 px-3 py-1 text-xs font-black uppercase tracking-normal shadow-soft ${dark ? "border-white/25 bg-white/10 text-[#fff176]" : "border-command/10 bg-yellow-100 text-safety-red"}`}>{eyebrow}</p>
       <h2 className={`text-balance text-3xl font-black leading-tight sm:text-4xl lg:text-5xl ${dark ? "text-white" : "text-ink"}`}>{title}</h2>
       {text ? <p className={`${align === "center" ? "mx-auto" : ""} mt-4 max-w-3xl text-lg leading-8 ${dark ? "text-white/75" : "text-muted"}`}>{text}</p> : null}
     </div>
@@ -118,7 +118,7 @@ export function Hero({
     overlay === "right" ? "hero-vignette-right" : overlay === "center" ? "hero-vignette-center" : "hero-vignette";
 
   return (
-    <section className={`relative isolate grid min-h-[76svh] overflow-hidden px-5 py-16 text-white sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] ${heroAlign[align] || heroAlign.left}`}>
+    <section className={`relative isolate grid min-h-[76svh] overflow-hidden px-5 py-16 text-white sm:px-8 lg:min-h-[78svh] lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] ${heroAlign[align] || heroAlign.left}`}>
       <div className="absolute inset-0 -z-20 bg-command">
         {image ? (
           <ResponsiveImage
@@ -128,7 +128,7 @@ export function Hero({
             smallWebp={image.smallWebp}
             priority
             className="h-full w-full"
-            imageClassName="h-full w-full object-cover"
+            imageClassName="h-full w-full object-cover saturate-[1.08]"
             sizes="100vw"
           />
         ) : (
@@ -136,17 +136,21 @@ export function Hero({
         )}
       </div>
       <div className={`absolute inset-0 -z-10 ${overlayClass}`} aria-hidden="true" />
-      <div className={`absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-safety-blue via-safety-teal via-safety-gold to-safety-red`} aria-hidden="true" />
+      <div className="absolute left-5 top-24 hidden h-24 w-24 -rotate-12 rounded-[1.8rem] border-4 border-dashed border-safety-gold/80 bg-white/10 lg:block" aria-hidden="true" />
+      <div className="absolute right-8 top-28 hidden h-16 w-16 rotate-12 rounded-full border-4 border-white/35 bg-safety-red/50 lg:block" aria-hidden="true" />
+      <div className="absolute bottom-24 right-[14%] hidden h-20 w-20 rounded-[1.3rem] border-4 border-dashed border-safety-teal/75 bg-white/10 rotate-6 lg:block" aria-hidden="true" />
+      <div className="absolute left-[8%] bottom-12 hidden h-3 w-32 -rotate-3 rounded-full bg-safety-gold/80 shadow-soft lg:block" aria-hidden="true" />
+      <div className="absolute inset-x-0 bottom-0 h-5 bg-gradient-to-r from-safety-blue via-safety-teal via-safety-gold to-safety-red" aria-hidden="true" />
 
       <div className={`${heroCopy[align] || heroCopy.left} ${align === "right" ? "lg:text-right" : ""}`}>
-        {kicker ? <p className="mb-4 inline-flex rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-black uppercase tracking-normal text-white/90 backdrop-blur">{kicker}</p> : null}
-        <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#71f0df]">{eyebrow}</p>
-        <h1 className="text-balance text-5xl font-black leading-[0.96] text-white sm:text-6xl lg:text-7xl">{title}</h1>
+        {kicker ? <p className="mb-4 inline-flex -rotate-1 rounded-xl border-2 border-command/25 bg-safety-gold px-4 py-2 text-xs font-black uppercase tracking-normal text-command shadow-[0_7px_0_rgb(12_20_37/0.18)]">{kicker}</p> : null}
+        <p className="mb-3 inline-flex rounded-full border-2 border-white/25 bg-white/15 px-3 py-1 text-xs font-black uppercase tracking-normal text-[#fff176] backdrop-blur">{eyebrow}</p>
+        <h1 className="text-balance text-5xl font-black leading-[0.96] text-white drop-shadow-[0_5px_0_rgb(12_20_37/0.25)] sm:text-6xl lg:text-7xl">{title}</h1>
         <p className={`${align === "center" ? "mx-auto" : align === "right" ? "lg:ml-auto" : ""} mt-6 max-w-3xl text-lg leading-8 text-white/80 sm:text-xl`}>{text}</p>
         {chips.length ? (
           <div className={`mt-6 flex flex-wrap gap-2 ${align === "center" ? "justify-center" : align === "right" ? "lg:justify-end" : ""}`}>
-            {chips.map((chip) => (
-              <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-black uppercase tracking-normal text-white/90 backdrop-blur" key={chip}>
+            {chips.map((chip, index) => (
+              <span className={`rounded-xl border-2 border-white/35 px-3 py-1 text-xs font-black uppercase tracking-normal text-white shadow-soft backdrop-blur ${index % 4 === 0 ? "bg-safety-blue/75" : index % 4 === 1 ? "bg-safety-teal/75" : index % 4 === 2 ? "bg-safety-red/75" : "bg-safety-gold/80 text-command"}`} key={chip}>
                 {chip}
               </span>
             ))}
@@ -155,8 +159,8 @@ export function Hero({
         {children ? <div className={`mt-8 flex flex-wrap gap-3 ${align === "center" ? "justify-center" : align === "right" ? "lg:justify-end" : ""}`}>{children}</div> : null}
         {stats.length ? (
           <div className={`mt-10 grid gap-3 sm:grid-cols-3 ${align === "right" ? "lg:ml-auto" : ""} max-w-2xl`}>
-            {stats.map(([value, label]) => (
-              <div className="rounded-lg border border-white/20 bg-white/10 p-4 backdrop-blur" key={label}>
+            {stats.map(([value, label], index) => (
+              <div className={`rounded-[1.1rem] border-2 border-white/25 p-4 shadow-soft backdrop-blur ${index % 3 === 0 ? "bg-white/15" : index % 3 === 1 ? "bg-safety-gold/20" : "bg-safety-teal/20"}`} key={label}>
                 <strong className="block text-2xl font-black text-white">{value}</strong>
                 <span className="mt-1 block text-sm font-bold text-white/75">{label}</span>
               </div>
@@ -175,16 +179,18 @@ export function CardGrid({ items, columns = "three", numbered = false, tone = "l
     four: "md:grid-cols-2",
   };
   const dark = tone === "dark";
+  const lightPalette = ["card-yellow", "card-cyan", "card-red", "card-green"];
+  const iconPalette = ["bg-safety-gold/25 text-safety-red", "bg-cyan-100 text-safety-blue", "bg-red-100 text-safety-red", "bg-green-100 text-safety-teal"];
 
   return (
     <div className={`grid gap-4 ${columnsClass[columns] || columnsClass.three}`}>
       {items.map(({ icon: Icon, title, text }, index) => (
         <Reveal
           as="article"
-          className={`rounded-[1.35rem] border p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-lift ${
+          className={`sketch-card rounded-[1.35rem] border-2 p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-lift ${
             dark
-              ? "border-white/10 bg-white/10 text-white backdrop-blur hover:border-white/25 hover:bg-white/15"
-              : "border-slate-200 bg-white text-ink hover:border-safety-blue/30"
+              ? "border-white/20 bg-white/10 text-white backdrop-blur hover:border-white/35 hover:bg-white/20"
+              : `border-command/10 ${lightPalette[index % lightPalette.length]} text-ink hover:border-safety-blue/40`
           }`}
           delay={index * 45}
           key={title}
@@ -194,7 +200,7 @@ export function CardGrid({ items, columns = "three", numbered = false, tone = "l
               {String(index + 1).padStart(2, "0")}
             </span>
           ) : null} */}
-          {Icon ? <Icon className={`mb-4 h-8 w-8 ${dark ? "text-[#71f0df]" : "text-safety-blue"}`} aria-hidden="true" /> : null}
+          {Icon ? <span className={`mb-4 inline-grid h-14 w-14 place-items-center rounded-[1.1rem] border-2 shadow-soft ${dark ? "border-white/15 bg-white/10" : `border-command/10 ${iconPalette[index % iconPalette.length]}`}`}><Icon className={`h-7 w-7 ${dark ? "text-[#fff176]" : ""}`} aria-hidden="true" /></span> : null}
           <h3 className={`text-xl font-black leading-tight ${dark ? "text-white" : "text-ink"}`}>{title}</h3>
           <p className={`mt-3 leading-7 ${dark ? "text-white/72" : "text-muted"}`}>{text}</p>
         </Reveal>
@@ -208,7 +214,7 @@ export function Checklist({ items, tone = "light" }) {
   return (
     <ul className="mt-6 grid gap-3">
       {items.map((item) => (
-        <li className={`flex items-start gap-3 rounded-lg border p-4 font-extrabold shadow-soft ${dark ? "border-white/10 bg-white/10 text-white" : "border-slate-200 bg-white text-ink"}`} key={item}>
+        <li className={`flex items-start gap-3 rounded-[1rem] border-2 p-4 font-extrabold shadow-soft ${dark ? "border-white/10 bg-white/10 text-white" : "border-command/10 bg-white/85 text-ink"}`} key={item}>
           <CheckCircle2 className={`mt-1 h-5 w-5 shrink-0 ${dark ? "text-[#71f0df]" : "text-green-700"}`} aria-hidden="true" />
           <span>{item}</span>
         </li>
@@ -219,11 +225,13 @@ export function Checklist({ items, tone = "light" }) {
 
 export function CTASection({ eyebrow, title, text, children }) {
   return (
-    <Reveal as="section" className="mx-auto grid max-w-none gap-7 bg-command px-5 py-16 text-white sm:px-8 lg:grid-cols-[1fr_auto] lg:items-center lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))]">
+    <Reveal as="section" className="kid-dots relative mx-auto grid max-w-none gap-7 overflow-hidden border-y-4 border-dashed border-safety-gold/50 px-5 py-16 text-command sm:px-8 lg:grid-cols-[1fr_auto] lg:items-center lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))]">
+      <div className="absolute -right-12 top-8 hidden h-36 w-36 rotate-12 rounded-[2rem] border-4 border-dashed border-safety-blue/25 bg-white/35 lg:block" aria-hidden="true" />
+      <div className="absolute -left-12 bottom-8 hidden h-28 w-28 -rotate-12 rounded-full border-4 border-dashed border-safety-red/25 bg-yellow-100/55 lg:block" aria-hidden="true" />
       <div>
-        <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#71f0df]">{eyebrow}</p>
-        <h2 className="max-w-4xl text-balance text-3xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">{title}</h2>
-        <p className="mt-4 max-w-3xl text-lg leading-8 text-white/75">{text}</p>
+        <p className="mb-3 inline-flex rounded-full border-2 border-safety-gold/70 bg-white px-3 py-1 text-xs font-black uppercase tracking-normal text-safety-red">{eyebrow}</p>
+        <h2 className="max-w-4xl text-balance text-3xl font-black leading-tight text-command sm:text-4xl lg:text-5xl">{title}</h2>
+        <p className="mt-4 max-w-3xl text-lg leading-8 text-body">{text}</p>
       </div>
       <div className="flex flex-wrap gap-3">{children}</div>
     </Reveal>

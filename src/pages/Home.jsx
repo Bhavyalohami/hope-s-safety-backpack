@@ -28,48 +28,55 @@ const benefitCards = [
   {
     icon: Backpack,
     title: "For students",
-    text: "A backpack that looks exciting while making readiness feel normal, approachable, and confidence-building.",
+    text: "A backpack idea that feels bright, brave, and easy for kids to understand.",
   },
   {
     icon: HeartHandshake,
     title: "For families",
-    text: "A clear safety story parents can understand quickly: visibility, tracking support, emergency supplies, and preparation.",
+    text: "A simple safety story parents can understand quickly: be seen, be ready, and know what to do next.",
   },
   {
     icon: Shield,
     title: "For schools",
-    text: "A school-safe program model built around guardian involvement, approved communication, and positive student leadership.",
+    text: "A positive school idea built around helping, kindness, guardian support, and student leadership.",
   },
 ];
 
 const operatingCycle = [
-  { icon: Radar, title: "Detect", text: "Visibility, awareness, and tracking concepts support early signals." },
-  { icon: CheckCircle2, title: "Prepare", text: "First aid, charging, lighting, and care supplies support daily readiness." },
-  { icon: Shield, title: "Protect", text: "Protective materials and compartments strengthen the safety proposition." },
-  { icon: Sparkles, title: "Empower", text: "Ambassador and club programs turn safety into confidence and leadership." },
+  { icon: Radar, title: "Notice", text: "Lights and awareness cues help kids stand out when it matters." },
+  { icon: CheckCircle2, title: "Pack", text: "Helpful supplies stay together, like a tiny safety station." },
+  { icon: Shield, title: "Protect", text: "Smart compartments make the backpack feel more prepared." },
+  { icon: Sparkles, title: "Lead", text: "Clubs and ambassadors turn safety into courage and kindness." },
+];
+
+const ideaNotes = [
+  ["Bright lights", "Help me be seen"],
+  ["Ready pocket", "Keep care items close"],
+  ["Find-me help", "Give families peace of mind"],
+  ["Kindness club", "Make safety feel brave"],
 ];
 
 export default function Home({ onNavigate }) {
   return (
     <main>
       <Hero
-        eyebrow="Student safety. Family confidence. Everyday readiness."
+        eyebrow="A bright school-day safety idea"
         title="Hope's Safety Backpack"
-        text="A student-created safety backpack concept built around visibility, emergency preparation, GPS support, protective materials, and confidence-building programs for school communities."
+        text="A student-created backpack idea with bright lights, a ready pocket, family support, and kindness programs kids can explain in their own words."
         image={{
           src: "/assets/home-story-hero.webp",
           webp: "/assets/home-story-hero.webp",
         }}
-        imageAlt="Modern school hallway product scene for Hope's Safety Backpack"
+        imageAlt="Bright school hallway scene for Hope's Safety Backpack"
         align="left"
         overlay="left"
-        kicker="Student-led safety concept"
+        kicker="Hope's big backpack idea"
         stats={[
-          ["11.1 lbs", "fully equipped estimate"],
+          ["Kid idea", "created from Hope's point of view"],
           ["2026", "patent milestone"],
-          ["12%", "ambassador learning model"],
+          ["Kindness", "student leadership theme"],
         ]}
-        chips={["LED visible", "GPS aware", "Emergency ready"]}
+        chips={["Bright lights", "Ready kit", "Kindness club"]}
       >
         <ButtonLink href="/features" onNavigate={onNavigate}>
           Explore Features
@@ -79,10 +86,10 @@ export default function Home({ onNavigate }) {
         </ButtonLink>
       </Hero>
 
-      <section className="grid bg-[#06101d] text-white sm:grid-cols-5" aria-label="Product highlights">
-        {["LED visible", "GPS aware", "Emergency ready", "Student led", "Family focused"].map((item, index) => (
+      <section className="grid bg-gradient-to-r from-safety-blue via-safety-teal to-safety-orange text-white sm:grid-cols-5" aria-label="Product highlights">
+        {["Be seen", "Be ready", "Ask for help", "Student idea", "Family care"].map((item, index) => (
           <span
-            className={`grid min-h-14 place-items-center border-b border-white/10 px-4 py-3 text-center text-sm font-black text-white/80 sm:min-h-[72px] sm:border-b-0 ${
+            className={`grid min-h-14 place-items-center border-b border-white/20 px-4 py-3 text-center text-sm font-black text-white sm:min-h-[72px] sm:border-b-0 ${
               index < 4 ? "sm:border-r" : ""
             }`}
             key={item}
@@ -92,13 +99,13 @@ export default function Home({ onNavigate }) {
         ))}
       </section>
 
-      <Reveal as="section" className="bg-command px-5 py-16 text-white sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
+      <Reveal as="section" className="bg-gradient-to-br from-safety-blue via-safety-teal to-safety-orange px-5 py-16 text-white sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
         <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
             <SectionHeader
               eyebrow="The mission"
-              title="A backpack idea shaped around the moments families worry about."
-              text="Hope's concept connects practical school-day readiness with an uplifting message: safety should feel understandable, visible, and empowering for kids."
+              title="A kid's question turned into a bright safety idea."
+              text="Hope's concept connects school-day readiness with an uplifting message: safety can feel brave, colorful, and easy for kids to talk about."
               tone="dark"
             />
             <div className="mt-7 grid gap-3 sm:grid-cols-3" aria-label="Key product context">
@@ -128,11 +135,11 @@ export default function Home({ onNavigate }) {
         </div>
       </Reveal>
 
-      <Reveal as="section" className="bg-[#f6f9fc] px-5 py-16 sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
+      <Reveal as="section" className="kid-dots px-5 py-16 sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
         <SectionHeader
           eyebrow="Core benefits"
-          title="The same idea speaks to students, families, and schools in different ways."
-          text="Each audience gets a clear reason to care: confidence for kids, peace of mind for families, and a positive safety culture for school communities."
+          title="Safety feels better when kids can picture it."
+          text="The story is simple on purpose: lights, supplies, support, and kindness all work together in a way students can remember."
           align="center"
         />
         <div className="mx-auto max-w-[1224px]">
@@ -140,12 +147,12 @@ export default function Home({ onNavigate }) {
         </div>
       </Reveal>
 
-      <Reveal as="section" className="bg-gradient-to-br from-[#07111f] via-command to-[#083b43] px-5 py-16 text-white sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
+      <Reveal as="section" className="bg-gradient-to-br from-safety-red via-safety-orange to-safety-gold px-5 py-16 text-white sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
         <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
           <SectionHeader
-            eyebrow="Safety operating cycle"
-            title="Detect, prepare, protect, and empower."
-            text="The product story is organized around four simple actions families can remember after one visit."
+            eyebrow="Hope's safety steps"
+            title="Notice, pack, protect, and lead."
+            text="The product story is organized around four simple actions a young student could explain in their own words."
             tone="dark"
           />
           <CardGrid items={operatingCycle} columns="four" numbered tone="dark" />
@@ -157,8 +164,8 @@ export default function Home({ onNavigate }) {
           <div className="lg:sticky lg:top-28">
             <SectionHeader
               eyebrow="Feature preview"
-              title="Eight safety signals, grouped for fast scanning."
-              text="The homepage gives a quick overview before visitors choose the full feature page."
+              title="Eight safety signals, like stickers on an idea board."
+              text="The homepage gives families a quick, colorful way to understand what Hope imagined."
             />
             <ButtonLink href="/features" variant="dark" onNavigate={onNavigate}>
               See All Features
@@ -179,23 +186,38 @@ export default function Home({ onNavigate }) {
         </div>
       </Reveal>
 
-      <Reveal as="section" className="bg-[#f6f9fc] px-5 py-16 sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
-        <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <figure className="max-h-[760px] overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-lift">
-            <ResponsiveImage
-              src="/assets/description-and-weight.webp"
-              webp="/assets/description-and-weight.webp"
-              smallWebp="/assets/description-and-weight-720.webp"
-              alt="Hope's Safety Backpack description and weight infographic"
-              imageClassName="max-h-[760px] w-full object-contain"
-              sizes="(max-width: 720px) 92vw, 42vw"
-            />
-          </figure>
+      <Reveal as="section" className="bg-[#fff7ed] px-5 py-16 sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
+        <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="rounded-[2rem] border-4 border-dashed border-safety-gold/70 bg-white p-5 shadow-lift sm:p-7" aria-label="Hope's idea board">
+            <div className="rounded-[1.5rem] bg-gradient-to-br from-sky-50 via-white to-yellow-50 p-5">
+              <p className="mb-4 w-fit -rotate-2 rounded-lg bg-safety-gold px-4 py-2 text-sm font-black uppercase text-command shadow-soft">Hope's idea board</p>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {ideaNotes.map(([title, text], index) => (
+                  <article
+                    className={`min-h-36 rounded-[1.25rem] border-2 border-command/10 p-5 shadow-soft ${
+                      index === 0
+                        ? "bg-yellow-100"
+                        : index === 1
+                          ? "bg-cyan-100"
+                          : index === 2
+                            ? "bg-red-100"
+                            : "bg-green-100"
+                    } ${index % 2 ? "rotate-1" : "-rotate-1"}`}
+                    key={title}
+                  >
+                    <span className="mb-3 inline-grid h-9 w-9 place-items-center rounded-full bg-white text-sm font-black text-command">{index + 1}</span>
+                    <h3 className="text-2xl font-black leading-tight text-command">{title}</h3>
+                    <p className="mt-2 text-lg font-extrabold leading-7 text-body">{text}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
           <div>
             <SectionHeader
-              eyebrow="Product details"
-              title="A closer look at the backpack concept."
-              text="Families can scan the major components, see how the backpack is organized, and understand how each feature supports everyday preparedness."
+              eyebrow="Backpack notes"
+              title="A closer look in kid-clear words."
+              text="Families can scan the big ideas, see how the backpack is organized, and understand how each feature supports everyday preparedness."
             />
             <div className="mt-6 grid gap-4">
               <article className="rounded-[1.25rem] border border-slate-200 bg-white p-6 shadow-soft">
@@ -203,8 +225,8 @@ export default function Home({ onNavigate }) {
                 <p className="mt-2 leading-7 text-muted">The product story starts with the everyday safety benefits families care about most.</p>
               </article>
               <article className="rounded-[1.25rem] border border-slate-200 bg-white p-6 shadow-soft">
-                <h3 className="text-xl font-black text-ink">Ready for real conversations</h3>
-                <p className="mt-2 leading-7 text-muted">The details help parents, schools, and ambassadors explain the safety mission with confidence.</p>
+                <h3 className="text-xl font-black text-ink">Easy to share</h3>
+                <p className="mt-2 leading-7 text-muted">The details help parents, schools, and student helpers explain the safety mission with confidence.</p>
               </article>
             </div>
           </div>

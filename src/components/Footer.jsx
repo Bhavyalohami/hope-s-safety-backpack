@@ -22,14 +22,14 @@ const footerGroups = [
     title: "Mission",
     links: [
       ["Hope's Story", "/story"],
-      ["Ambassadors", "/financial"],
+      ["Helpers", "/ambassadors"],
       ["Safety Club", "/safety-club"],
     ],
   },
   {
     title: "Team",
     links: [
-      ["Sales Team", "/sales-agenda"],
+      ["Team Guide", "/helper-team"],
       ["Applications", "/forms"],
       ["Contact", "/forms"],
     ],
@@ -43,27 +43,27 @@ export function Footer({ onNavigate }) {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-[#050d18] text-white">
-      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-safety-blue via-safety-teal via-safety-gold to-safety-red" aria-hidden="true" />
-      <div className="absolute -right-36 top-16 h-72 w-72 rounded-full bg-safety-blue/18 blur-3xl" aria-hidden="true" />
-      <div className="absolute -left-28 bottom-20 h-72 w-72 rounded-full bg-safety-red/16 blur-3xl" aria-hidden="true" />
+    <footer className="kid-dots relative overflow-hidden border-t-4 border-dashed border-safety-gold/50 text-command">
+      <div className="absolute inset-x-0 top-0 h-3 bg-gradient-to-r from-safety-blue via-safety-teal via-safety-gold to-safety-red" aria-hidden="true" />
+      <div className="absolute -right-24 top-20 h-52 w-52 rotate-12 rounded-[3rem] border-4 border-dashed border-safety-blue/25 bg-white/45" aria-hidden="true" />
+      <div className="absolute -left-20 bottom-20 h-44 w-44 -rotate-12 rounded-full border-4 border-dashed border-safety-red/25 bg-yellow-100/60" aria-hidden="true" />
 
       <section className="relative mx-auto max-w-[1220px] px-5 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="rounded-[2rem] border border-white/10 bg-white/7 p-7 shadow-lift backdrop-blur sm:p-10">
-            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/8 px-3 py-1 text-xs font-black uppercase tracking-normal text-[#71f0df]">
+          <div className="kid-paper rounded-[2rem] border-4 border-dashed border-safety-blue/35 p-7 shadow-lift sm:p-10">
+            <p className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-safety-gold/70 bg-yellow-100 px-3 py-1 text-xs font-black uppercase tracking-normal text-safety-red">
               <ShieldCheck size={15} aria-hidden="true" />
-              Safety starts with confidence
+              Hope's reminder
             </p>
             <h2 className="max-w-3xl text-balance text-4xl font-black leading-[1.03] sm:text-5xl lg:text-6xl">
-              A student-created idea for safer, more prepared school days.
+              Big safety ideas can start with one brave kid question.
             </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-white/72">
-              Hope's Safety Backpack brings visibility, readiness, and positive student leadership into one memorable product story.
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-body">
+              Hope's Safety Backpack brings lights, care supplies, family support, and kindness into one bright school-day idea.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-safety-red to-safety-orange px-5 py-3 text-sm font-black text-white shadow-[0_16px_36px_rgb(215_25_32/0.26)] transition hover:-translate-y-0.5"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-command bg-gradient-to-r from-safety-red to-safety-orange px-5 py-3 text-sm font-black text-white shadow-[0_8px_0_rgb(12_20_37/0.16)] transition hover:-translate-y-0.5"
                 href={withRoutePath("/forms")}
                 onClick={go("/forms")}
               >
@@ -71,7 +71,7 @@ export function Footer({ onNavigate }) {
                 <ArrowRight size={17} aria-hidden="true" />
               </a>
               <a
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/16 bg-white/8 px-5 py-3 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-white/12"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border-2 border-command bg-white px-5 py-3 text-sm font-black text-command shadow-[0_8px_0_rgb(12_20_37/0.1)] transition hover:-translate-y-0.5"
                 href={withRoutePath("/story")}
                 onClick={go("/story")}
               >
@@ -82,25 +82,34 @@ export function Footer({ onNavigate }) {
 
           <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
             {[
-              ["Visible", "Lighting and awareness cues make the safety story easy to see."],
-              ["Prepared", "Emergency supplies and daily readiness stay central to the concept."],
-              ["Empowered", "Programs help students practice confidence, kindness, and leadership."],
-            ].map(([title, text]) => (
-              <article className="rounded-[1.5rem] border border-white/10 bg-white/7 p-6 backdrop-blur" key={title}>
-                <span className="block text-3xl font-black text-white">{title}</span>
-                <p className="mt-2 text-sm font-bold leading-6 text-white/68">{text}</p>
+              ["Be seen", "Bright cues make the safety story easy to notice."],
+              ["Be ready", "Helpful supplies stay central to the school-day idea."],
+              ["Be kind", "Programs help students practice courage and leadership."],
+            ].map(([title, text], index) => (
+              <article className={`rounded-[1.5rem] border-2 border-command/10 p-6 shadow-soft ${index === 0 ? "bg-cyan-100" : index === 1 ? "bg-yellow-100" : "bg-green-100"}`} key={title}>
+                <span className="block text-3xl font-black text-command">{title}</span>
+                <p className="mt-2 text-sm font-bold leading-6 text-body">{text}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="relative border-t border-white/10">
+      <section className="relative border-t-4 border-dashed border-command/10 bg-white/70">
         <div className="mx-auto grid max-w-[1220px] gap-10 px-5 py-10 sm:px-6 lg:grid-cols-[1.05fr_1.2fr_auto] lg:px-8">
           <div>
-            <img className="w-48" src={withBasePath("/assets/brand-logo.svg")} alt="Hope's Safety Backpack" width="190" height="79" loading="lazy" />
-            <p className="mt-5 max-w-md leading-7 text-white/66">{site.description}</p>
-            <p className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-white/58">
+            <a className="group inline-flex max-w-full items-center gap-3 rounded-[1.35rem] border-2 border-dashed border-command/15 bg-white/80 p-3 pr-5 shadow-soft transition hover:-translate-y-0.5 hover:bg-white" href={withRoutePath("/")} onClick={go("/")} aria-label="Hope's Safety Backpack home">
+              <span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-white shadow-[0_7px_0_rgb(12_20_37/0.1)]">
+                <img className="h-14 w-14" src={withBasePath("/assets/logo-mark.svg")} alt="" width="56" height="56" loading="lazy" />
+              </span>
+              <span className="min-w-0">
+                <span className="block text-xl font-black leading-none text-command">Hope's Safety</span>
+                <span className="mt-1 block text-xl font-black leading-none text-command">Backpack</span>
+                <span className="mt-2 block text-xs font-black uppercase tracking-normal text-safety-red">Be seen. Be ready. Be kind.</span>
+              </span>
+            </a>
+            <p className="mt-5 max-w-md leading-7 text-body">{site.description}</p>
+            <p className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-muted">
               <MapPin size={17} aria-hidden="true" />
               Orlando, Florida
             </p>
@@ -109,11 +118,11 @@ export function Footer({ onNavigate }) {
           <nav className="grid gap-7 sm:grid-cols-3" aria-label="Footer navigation">
             {footerGroups.map((group) => (
               <div key={group.title}>
-                <h3 className="text-sm font-black uppercase tracking-normal text-white">{group.title}</h3>
+                <h3 className="text-sm font-black uppercase tracking-normal text-safety-red">{group.title}</h3>
                 <div className="mt-4 grid gap-3">
                   {group.links.map(([label, href]) => (
                     <a
-                      className="w-fit text-sm font-bold text-white/62 transition hover:text-white"
+                      className="w-fit rounded-full bg-yellow-50 px-3 py-1 text-sm font-bold text-body transition hover:bg-yellow-100 hover:text-command"
                       href={withRoutePath(href)}
                       key={label}
                       onClick={go(href)}
@@ -127,11 +136,11 @@ export function Footer({ onNavigate }) {
           </nav>
 
           <div>
-            <h3 className="text-sm font-black uppercase tracking-normal text-white">Connect</h3>
+            <h3 className="text-sm font-black uppercase tracking-normal text-safety-red">Connect</h3>
             <div className="mt-4 flex flex-wrap gap-2 lg:max-w-40">
               {socialLinks.map(({ label, href, icon: Icon }) => (
                 <a
-                  className="inline-grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/7 text-white transition hover:-translate-y-0.5 hover:bg-white/12"
+                  className="inline-grid h-11 w-11 place-items-center rounded-full border-2 border-command/10 bg-white text-command shadow-soft transition hover:-translate-y-0.5 hover:bg-yellow-100"
                   href={href}
                   key={label}
                   target={href.startsWith("mailto:") ? undefined : "_blank"}
@@ -145,9 +154,9 @@ export function Footer({ onNavigate }) {
           </div>
         </div>
 
-        <div className="mx-auto flex max-w-[1220px] flex-wrap items-center justify-between gap-4 border-t border-white/10 px-5 py-6 text-sm font-bold text-white/48 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-[1220px] flex-wrap items-center justify-between gap-4 border-t border-command/10 px-5 py-6 text-sm font-bold text-muted sm:px-6 lg:px-8">
           <span>Hope's Safety Backpack</span>
-          <span>Visibility. Preparedness. Student confidence.</span>
+          <span>Be seen. Be ready. Be kind.</span>
         </div>
       </section>
     </footer>

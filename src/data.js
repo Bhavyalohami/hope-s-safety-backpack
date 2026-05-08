@@ -11,8 +11,8 @@ export const routes = [
   { path: "/", label: "Home" },
   { path: "/features", label: "Features" },
   { path: "/story", label: "Story" },
-  { path: "/financial", label: "Ambassadors" },
-  { path: "/sales-agenda", label: "Sales Team" },
+  { path: "/ambassadors", label: "Helpers" },
+  { path: "/helper-team", label: "Team Guide" },
   { path: "/safety-club", label: "Safety Club" },
   { path: "/forms", label: "Forms", cta: true },
 ];
@@ -60,30 +60,30 @@ export const routeMeta = {
         "The story behind Hope's Safety Backpack and the student-led mission to help kids feel safer at school.",
     },
   },
-  "/financial": {
-    title: "Student Ambassador Program | Hope's Safety Backpack",
+  "/ambassadors": {
+    title: "Student Helper Program | Hope's Safety Backpack",
     description:
-      "Discover the supervised Hope's Safety Backpack ambassador model for student entrepreneurship, family support, referral selling, and financial literacy.",
+      "Discover the supervised Hope's Safety Backpack helper program for student confidence, family support, kind sharing, and school-safe leadership.",
     keywords:
-      "student ambassador program, kids financial literacy, student entrepreneurship, safety backpack ambassadors",
+      "student helper program, student safety leadership, kids safety program, safety backpack ambassadors",
     schema: {
       "@type": "EducationalOrganization",
-      name: "Hope's Safety Backpack Ambassador Program",
+      name: "Hope's Safety Backpack Student Helper Program",
       description:
-        "A supervised student ambassador concept designed to teach product communication, leadership, referral selling, and money responsibility.",
+        "A supervised student helper concept designed to teach clear communication, kindness, confidence, and responsibility.",
     },
   },
-  "/sales-agenda": {
-    title: "Sales Team Agenda | Hope's Safety Backpack",
+  "/helper-team": {
+    title: "Helper Team Guide | Hope's Safety Backpack",
     description:
-      "A clear sales team agenda for Hope's Safety Backpack covering training, parent communication, school-safe promotion, fulfillment, and compliance.",
+      "A clear helper team playbook for Hope's Safety Backpack covering practice, parent communication, school-safe sharing, official next steps, and permission-first rules.",
     keywords:
-      "safety backpack sales agenda, school safety sales team, backpack ambassador training",
+      "safety backpack playbook, school safety helper team, backpack ambassador training",
     schema: {
       "@type": "WebPage",
-      name: "Hope's Safety Backpack sales team agenda",
+      name: "Hope's Safety Backpack helper team guide",
       description:
-        "Operational sales agenda for a school-safe student safety backpack program.",
+        "Helper team guide for a school-safe student safety backpack program.",
     },
   },
   "/safety-club": {
@@ -104,7 +104,7 @@ export const routeMeta = {
     description:
       "Access Hope's Safety Backpack ambassador application and preorder form resources for families interested in the product and student programs.",
     keywords:
-      "Hope's Safety Backpack forms, ambassador application, backpack preorder form, sales ambassador application",
+      "Hope's Safety Backpack forms, ambassador application, backpack preorder form, safety backpack application",
     schema: {
       "@type": "ContactPage",
       name: "Hope's Safety Backpack forms",
@@ -115,13 +115,13 @@ export const routeMeta = {
 };
 
 export const safetyFeatures = [
-  ["Dual camera awareness", "Front and rear camera concepts support a stronger visibility and awareness story."],
-  ["LED visibility grid", "Bright multi-color lighting helps students stand out during low-light travel and arrival times."],
-  ["Emergency readiness kit", "First aid, masks, sanitizer, and care supplies keep everyday safety items within reach."],
-  ["Hidden GPS support", "Trackable support is positioned to give families an extra layer of peace of mind."],
-  ["Charging station", "A connected charging area supports phones and small everyday electronics."],
-  ["High-beam flashlight", "Forward-facing light helps students navigate darker or uncertain environments."],
-  ["Flotation support", "A water-safety concept adds readiness for emergency situations near water."],
+  ["Look-around camera idea", "Front and rear camera concepts help tell the story of watching out for students."],
+  ["Bright LED lights", "Multi-color lighting helps students stand out during low-light travel and arrival times."],
+  ["Ready kit pocket", "First aid, masks, sanitizer, and care supplies keep helpful safety items within reach."],
+  ["Find-me GPS support", "Trackable support gives families another way to feel calm and connected."],
+  ["Charging spot", "A connected charging area supports phones and small everyday electronics."],
+  ["Big flashlight", "Forward-facing light helps students navigate darker or uncertain environments."],
+  ["Water safety idea", "A water-safety concept adds readiness for emergency situations near water."],
   ["Protective shell", "Clear materials and protected compartments are presented as part of the safety system."],
 ];
 
@@ -144,15 +144,15 @@ export const faqs = [
   {
     question: "How does the ambassador program stay school-safe?",
     answer:
-      "The model emphasizes guardian consent, school-approved communication, official ordering channels, referral codes, and no student-managed inventory.",
+      "The model emphasizes guardian consent, school-approved communication, official next steps, simple helper cards, and no student-handled orders.",
   },
 ];
 
 export const agendaItems = [
-  ["Vision", "Improve student safety while introducing entrepreneurship, saving, budgeting, and leadership."],
-  ["Starter kit", "Demo backpack, personalized cards, and an official sales guide for clear presentations."],
-  ["Training", "Product knowledge, safety messaging, communication, commission tracking, and goal setting."],
-  ["Channels", "School-approved events, parent channels, and controlled online ordering."],
-  ["Fulfillment", "Orders ship through official Hope's Safety Backpack channels without student inventory."],
-  ["Compliance", "Guardian consent, school approval, transparent tracking, and clear promotional boundaries."],
+  ["Mission", "Help kids feel seen, ready, brave, and kind during the school day."],
+  ["Helper kit", "Demo backpack, colorful cards, and a tiny script kids can practice with a grown-up."],
+  ["Practice", "Safety words, listening skills, kind answers, and a simple goal chart."],
+  ["Safe places", "School-approved events, parent channels, and friendly community tables."],
+  ["Official path", "Families use the official Hope's Safety Backpack forms and contact details."],
+  ["Permission", "Guardian consent, school approval, and clear helper boundaries come first."],
 ];
