@@ -126,8 +126,9 @@ export default function Home({ onNavigate }) {
           <figure className="overflow-hidden rounded-[2rem] border border-white/12 bg-white/10 p-3 shadow-lift">
             <ResponsiveImage
               src="/assets/hero-backpack.webp"
-              webp="/assets/hero-backpack.webp"
+              webp="/assets/hero-backpack-2x.webp"
               smallWebp="/assets/hero-backpack-720.webp"
+              webpWidth={2508}
               alt="Hope's Safety Backpack product rendering"
               imageClassName="h-full max-h-[640px] w-full rounded-[1.45rem] object-cover"
             />
@@ -186,6 +187,44 @@ export default function Home({ onNavigate }) {
         </div>
       </Reveal>
 
+      <Reveal as="section" className="kid-dots bg-sky-50 px-5 py-16 sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
+        <div className="grid items-start gap-10 lg:grid-cols-[0.72fr_1.28fr]">
+          <div className="lg:sticky lg:top-28">
+            <SectionHeader
+              eyebrow="Big picture"
+              title="One cheerful chart for the whole backpack idea."
+              text="Families can scan the backpack, see the safety pieces, and understand how Hope's idea fits together before they explore the full feature page."
+            />
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+              {[
+                ["Quick to scan", "The image keeps the main feature ideas together in one visual."],
+                ["Easy to share", "Parents, schools, and helpers can point to the same backpack map."],
+              ].map(([title, text], index) => (
+                <article
+                  className={`rounded-[1.25rem] border-2 border-command/10 p-5 shadow-soft ${
+                    index === 0 ? "bg-yellow-100" : "bg-cyan-100"
+                  }`}
+                  key={title}
+                >
+                  <h3 className="text-xl font-black text-command">{title}</h3>
+                  <p className="mt-2 leading-7 text-body">{text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+          <figure className="rounded-[2rem] border-4 border-dashed border-safety-gold/70 bg-white p-3 shadow-lift">
+            <ResponsiveImage
+              src="/assets/description-and-weight.webp"
+              webp="/assets/description-and-weight.webp"
+              smallWebp="/assets/description-and-weight-720.webp"
+              alt="Hope's Safety Backpack description and weight chart with feature callouts around the backpack"
+              imageClassName="aspect-[2/3] max-h-[980px] w-full rounded-[1.45rem] object-contain"
+              sizes="(max-width: 720px) 92vw, 68vw"
+            />
+          </figure>
+        </div>
+      </Reveal>
+
       <Reveal as="section" className="bg-[#fff7ed] px-5 py-16 sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
         <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="rounded-[2rem] border-4 border-dashed border-safety-gold/70 bg-white p-5 shadow-lift sm:p-7" aria-label="Hope's idea board">
@@ -237,7 +276,7 @@ export default function Home({ onNavigate }) {
         <SectionHeader eyebrow="FAQ" title="Helpful answers for families and partners." align="center" />
         <div className="grid gap-4 md:grid-cols-2">
           {faqs.map((item) => (
-            <details className="rounded-[1.25rem] border border-slate-200 bg-white shadow-soft" key={item.question}>
+            <details className="rounded-[1.25rem] border border-slate-200 bg-white shadow-soft !h-fit" key={item.question}>
               <summary className="cursor-pointer p-5 font-black text-ink">{item.question}</summary>
               <p className="p-5 pt-4 leading-7 text-muted">{item.answer}</p>
             </details>

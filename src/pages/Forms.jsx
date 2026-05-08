@@ -194,7 +194,7 @@ export default function Forms({ onNavigate }) {
         <SectionHeader eyebrow="FAQ" title="Important form and launch notes." align="center" />
         <div className="grid gap-4 md:grid-cols-2">
           {faqs.map((item) => (
-            <details className="rounded-[1.25rem] border-2 border-command/10 bg-white shadow-soft" key={item.question}>
+            <details className="rounded-[1.25rem] border-2 border-command/10 bg-white shadow-soft !h-fit" key={item.question}>
               <summary className="cursor-pointer p-5 font-black text-ink">{item.question}</summary>
               <p className="p-5 pt-4 leading-7 text-muted">{item.answer}</p>
             </details>

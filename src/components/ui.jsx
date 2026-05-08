@@ -66,13 +66,18 @@ export function ResponsiveImage({
   src,
   webp,
   smallWebp,
+  webpWidth = 1254,
+  smallWebpWidth = 720,
   className = "",
   imageClassName = "",
   loading = "lazy",
   priority = false,
   sizes = "(max-width: 720px) 92vw, 48vw",
 }) {
-  const webpSet = [smallWebp ? `${withBasePath(smallWebp)} 720w` : null, webp ? `${withBasePath(webp)} 1254w` : null].filter(Boolean).join(", ");
+  const webpSet = [
+    smallWebp ? `${withBasePath(smallWebp)} ${smallWebpWidth}w` : null,
+    webp ? `${withBasePath(webp)} ${webpWidth}w` : null,
+  ].filter(Boolean).join(", ");
 
   return (
     <picture className={className}>
@@ -94,7 +99,7 @@ export function SectionHeader({ eyebrow, title, text, align = "left", tone = "li
   return (
     <div className={`${align === "center" ? "mx-auto text-center" : ""} mb-8 max-w-4xl`}>
       <p className={`mb-3 inline-flex -rotate-1 rounded-xl border-2 px-3 py-1 text-xs font-black uppercase tracking-normal shadow-soft ${dark ? "border-white/25 bg-white/10 text-[#fff176]" : "border-command/10 bg-yellow-100 text-safety-red"}`}>{eyebrow}</p>
-      <h2 className={`text-balance text-3xl font-black leading-tight sm:text-4xl lg:text-5xl ${dark ? "text-white" : "text-ink"}`}>{title}</h2>
+      <h2 className={`text-balance text-2xl font-black leading-tight sm:text-4xl lg:text-5xl ${dark ? "text-white" : "text-ink"}`}>{title}</h2>
       {text ? <p className={`${align === "center" ? "mx-auto" : ""} mt-4 max-w-3xl text-lg leading-8 ${dark ? "text-white/75" : "text-muted"}`}>{text}</p> : null}
     </div>
   );
