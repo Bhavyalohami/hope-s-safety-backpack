@@ -36,16 +36,22 @@ export default function SafetyClub({ onNavigate }) {
     <main>
       <Hero
         eyebrow="Safety Patrol Club"
-        title="Kindness and Safety Culture"
+        title="Hope's Safety Patrol Club 501 (c) (3) Non Profit Organization Agenda"
         text="A school-friendly club concept that turns safety, kindness, and peer responsibility into visible habits students can practice, notice, and celebrate."
         image={{
           src: "/assets/safety-club-hero.webp",
           webp: "/assets/safety-club-hero.webp",
         }}
+        foregroundImage={{
+          src: "/assets/safety-patrol-agenda-hero.webp",
+          webp: "/assets/safety-patrol-agenda-hero.webp",
+          smallWebp: "/assets/safety-patrol-agenda-hero-720.webp",
+          alt: "Hope's Safety Patrol Club backpack agenda poster with safety feature callouts",
+        }}
         imageAlt="Positive school safety club mural with badges, kindness tokens, and reward materials"
-        align="center"
-        overlay="center"
-        kicker="Kindness badge board"
+        align="right"
+        overlay="right"
+        kicker="501 (c) (3) nonprofit agenda"
         chips={["Kind choices", "Safe actions", "Happy recognition"]}
       />
 

@@ -4,16 +4,124 @@ import { faqs } from "../data.js";
 import { ButtonLink, Hero, Reveal, SectionHeader } from "../components/ui.jsx";
 import { withBasePath } from "../paths.js";
 
+const FORM_SUBMIT_RECIPIENT = "bhavyalohami@gmail.com";
+const FORM_SUBMIT_ENDPOINT = `https://formsubmit.co/${FORM_SUBMIT_RECIPIENT}`;
+const FORM_POST_SETTLE_DELAY = 1400;
+
+function createHiddenInput(name, value) {
+  const input = document.createElement("input");
+  input.type = "hidden";
+  input.name = name;
+  input.value = value;
+  return input;
+}
+
+function cleanValue(value, fallback = "Not provided") {
+  const trimmed = String(value || "").trim();
+  return trimmed || fallback;
+}
+
+function postToFormSubmit(fields) {
+  return new Promise((resolve) => {
+    const id = `formsubmit-frame-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const iframe = document.createElement("iframe");
+    iframe.name = id;
+    iframe.title = "Form submission";
+    iframe.style.display = "none";
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = FORM_SUBMIT_ENDPOINT;
+    form.target = id;
+    form.acceptCharset = "utf-8";
+    form.style.display = "none";
+
+    Object.entries(fields).forEach(([name, value]) => {
+      form.appendChild(createHiddenInput(name, value));
+    });
+
+    document.body.appendChild(iframe);
+    document.body.appendChild(form);
+    form.submit();
+    window.setTimeout(() => {
+      form.remove();
+      iframe.remove();
+      resolve();
+    }, FORM_POST_SETTLE_DELAY);
+  });
+}
+
 function InterestForm({ type }) {
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const isPreorder = type === "preorder";
 
   return (
     <form
       className="kid-paper rounded-[2rem] border-4 border-dashed border-safety-blue/35 p-6 shadow-soft sm:p-7"
-      onSubmit={(event) => {
+      onSubmit={async (event) => {
         event.preventDefault();
-        setMessage("Thank you for your interest. Please use the downloadable form or contact the Hope's Safety Backpack team for the next step.");
+        const form = event.currentTarget;
+        const formData = new FormData(form);
+        const email = String(formData.get("email") || "").trim();
+        const honeypot = String(formData.get("hp_email") || "").trim();
+
+        if (honeypot) {
+          setMessage("Thank you. Your details were received.");
+          form.reset();
+          return;
+        }
+
+        if (!email) {
+          setMessage("Please add an email address so we can send your details.");
+          return;
+        }
+
+        setIsSubmitting(true);
+        setMessage("");
+
+        const formType = isPreorder ? "Backpack Preorder Interest" : "Helper Application Interest";
+        const details = {
+          guardianName: formData.get("guardianName"),
+          email,
+          phone: formData.get("phone"),
+          studentName: formData.get("studentName"),
+          quantity: formData.get("quantity"),
+          preferredColor: formData.get("preferredColor"),
+          school: formData.get("school"),
+          age: formData.get("age"),
+          notes: formData.get("notes"),
+        };
+        const submissionFields = {
+          _subject: `Hope's Safety Backpack: ${formType}`,
+          _template: "box",
+          _captcha: "false",
+          _cc: email,
+          _replyto: email,
+          _honey: "",
+          Name: cleanValue(details.guardianName),
+          Email: email,
+          "Form Type": formType,
+          "Parent or Guardian": cleanValue(details.guardianName),
+          "Phone Number": cleanValue(details.phone),
+          "Student Name": cleanValue(details.studentName),
+          ...(isPreorder
+            ? {
+                Quantity: cleanValue(details.quantity),
+                "Preferred Color": cleanValue(details.preferredColor),
+              }
+            : {
+                "School or Organization": cleanValue(details.school),
+                "Ambassador Age": cleanValue(details.age),
+              }),
+          Notes: cleanValue(details.notes, "No notes were added."),
+          "Submitted From": "Hope's Safety Backpack website",
+        };
+
+        await postToFormSubmit(submissionFields);
+        setMessage("Thank you. Your details were sent successfully.");
+        form.reset();
+        setIsSubmitting(false);
       }}
     >
       <div className="mb-6 flex items-center gap-2 rounded-[1rem] border-2 border-yellow-300/70 bg-yellow-100/80 p-3 font-extrabold text-yellow-900">
@@ -24,11 +132,11 @@ function InterestForm({ type }) {
       <div className="grid gap-4 md:grid-cols-2">
         <label className="grid gap-2 text-sm font-black text-ink">
           Parent or Guardian Name
-          <input className="min-h-12 rounded-xl border-2 border-command/10 bg-white px-3 text-body transition focus:border-safety-blue focus:shadow-[0_0_0_3px_rgb(21_94_239/0.12)]" type="text" name="guardianName" placeholder="Enter full name" autoComplete="name" />
+          <input className="min-h-12 rounded-xl border-2 border-command/10 bg-white px-3 text-body transition focus:border-safety-blue focus:shadow-[0_0_0_3px_rgb(21_94_239/0.12)]" type="text" name="guardianName" placeholder="Enter full name" autoComplete="name" required />
         </label>
         <label className="grid gap-2 text-sm font-black text-ink">
           Email Address
-          <input className="min-h-12 rounded-xl border-2 border-command/10 bg-white px-3 text-body transition focus:border-safety-blue focus:shadow-[0_0_0_3px_rgb(21_94_239/0.12)]" type="email" name="email" placeholder="parent@example.com" autoComplete="email" />
+          <input className="min-h-12 rounded-xl border-2 border-command/10 bg-white px-3 text-body transition focus:border-safety-blue focus:shadow-[0_0_0_3px_rgb(21_94_239/0.12)]" type="email" name="email" placeholder="parent@example.com" autoComplete="email" required />
         </label>
         <label className="grid gap-2 text-sm font-black text-ink">
           Phone Number
@@ -64,7 +172,7 @@ function InterestForm({ type }) {
               <input className="min-h-12 rounded-xl border-2 border-command/10 bg-white px-3 text-body transition focus:border-safety-blue focus:shadow-[0_0_0_3px_rgb(21_94_239/0.12)]" type="text" name="school" placeholder="School name" />
             </label>
             <label className="grid gap-2 text-sm font-black text-ink">
-              Ambassador Age
+              Keeping Kids Safe Reps
               <input className="min-h-12 rounded-xl border-2 border-command/10 bg-white px-3 text-body transition focus:border-safety-blue focus:shadow-[0_0_0_3px_rgb(21_94_239/0.12)]" type="number" min="7" name="age" placeholder="7" inputMode="numeric" />
             </label>
           </>
@@ -80,8 +188,15 @@ function InterestForm({ type }) {
         />
       </label>
 
-      <button className="mt-4 inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-command bg-gradient-to-r from-safety-red to-safety-orange px-5 py-3 text-sm font-black leading-none text-white shadow-[0_8px_0_rgb(12_20_37/0.16)] transition hover:-translate-y-0.5 hover:shadow-lift sm:w-auto" type="submit">
-        <span>{isPreorder ? "Prepare Preorder Details" : "Prepare Application Details"}</span>
+      <div className="hidden" aria-hidden="true">
+        <label>
+          Leave this field blank
+          <input type="text" name="hp_email" tabIndex="-1" autoComplete="off" />
+        </label>
+      </div>
+
+      <button className="mt-4 inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-command bg-gradient-to-r from-safety-red to-safety-orange px-5 py-3 text-sm font-black leading-none text-white shadow-[0_8px_0_rgb(12_20_37/0.16)] transition hover:-translate-y-0.5 hover:shadow-lift disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto" type="submit" disabled={isSubmitting}>
+        <span>{isSubmitting ? "Sending..." : isPreorder ? "Send Preorder Details" : "Send Application Details"}</span>
         <Send size={17} aria-hidden="true" />
       </button>
       {message ? <p className="mt-4 font-black text-green-700" role="status">{message}</p> : null}
@@ -160,7 +275,7 @@ export default function Forms({ onNavigate }) {
                 aria-selected={active === "ambassador"}
                 onClick={() => setActive("ambassador")}
               >
-                Ambassador
+                Keeping Kids Safe Application
               </button>
               <button
                 className={`min-h-10 min-w-32 rounded-full px-4 py-2 font-black ${active === "preorder" ? "bg-command text-white" : "text-muted"}`}

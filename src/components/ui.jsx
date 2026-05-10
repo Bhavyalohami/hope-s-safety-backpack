@@ -10,9 +10,9 @@ const heroAlign = {
 };
 
 const heroCopy = {
-  left: "max-w-3xl",
-  right: "max-w-3xl lg:mr-0",
-  center: "mx-auto max-w-4xl",
+  left: "w-full max-w-3xl",
+  right: "w-full max-w-3xl lg:mr-0",
+  center: "mx-auto w-full max-w-4xl",
 };
 
 export function Reveal({ as: Tag = "div", className = "", delay = 0, children }) {
@@ -111,6 +111,7 @@ export function Hero({
   text,
   children,
   image,
+  foregroundImage,
   graphic,
   imageAlt,
   align = "left",
@@ -123,7 +124,7 @@ export function Hero({
     overlay === "right" ? "hero-vignette-right" : overlay === "center" ? "hero-vignette-center" : "hero-vignette";
 
   return (
-    <section className={`relative isolate grid min-h-[76svh] overflow-hidden px-5 py-16 text-white sm:px-8 lg:min-h-[78svh] lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] ${heroAlign[align] || heroAlign.left}`}>
+    <section className={`relative isolate grid min-h-[76svh] overflow-hidden px-3 py-16 text-white sm:px-8 lg:min-h-[78svh] lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] ${heroAlign[align] || heroAlign.left}`}>
       <div className="absolute inset-0 -z-20 bg-command">
         {image ? (
           <ResponsiveImage
@@ -133,7 +134,7 @@ export function Hero({
             smallWebp={image.smallWebp}
             priority
             className="h-full w-full"
-            imageClassName="h-full w-full object-cover saturate-[1.08]"
+            imageClassName={`h-full w-full ${image.fit === "contain" ? "object-contain" : "object-cover"} ${image.position || ""} saturate-[1.08]`}
             sizes="100vw"
           />
         ) : (
@@ -147,15 +148,15 @@ export function Hero({
       <div className="absolute left-[8%] bottom-12 hidden h-3 w-32 -rotate-3 rounded-full bg-safety-gold/80 shadow-soft lg:block" aria-hidden="true" />
       <div className="absolute inset-x-0 bottom-0 h-5 bg-gradient-to-r from-safety-blue via-safety-teal via-safety-gold to-safety-red" aria-hidden="true" />
 
-      <div className={`${heroCopy[align] || heroCopy.left} ${align === "right" ? "lg:text-right" : ""}`}>
+      <div className={`relative z-10 ${heroCopy[align] || heroCopy.left} ${align === "right" ? "lg:text-right" : ""}`}>
         {kicker ? <p className="mb-4 inline-flex -rotate-1 rounded-xl border-2 border-command/25 bg-safety-gold px-4 py-2 text-xs font-black uppercase tracking-normal text-command shadow-[0_7px_0_rgb(12_20_37/0.18)]">{kicker}</p> : null}
         <p className="mb-3 inline-flex rounded-full border-2 border-white/25 bg-white/15 px-3 py-1 text-xs font-black uppercase tracking-normal text-[#fff176] backdrop-blur">{eyebrow}</p>
-        <h1 className="text-balance text-5xl font-black leading-[0.96] text-white drop-shadow-[0_5px_0_rgb(12_20_37/0.25)] sm:text-6xl lg:text-7xl">{title}</h1>
+        <h1 className="text-balance text-5xl font-black leading-[0.96] text-white drop-shadow-[0_5px_0_rgb(12_20_37/0.25)] sm:text-6xl">{title}</h1>
         <p className={`${align === "center" ? "mx-auto" : align === "right" ? "lg:ml-auto" : ""} mt-6 max-w-3xl text-lg leading-8 text-white/80 sm:text-xl`}>{text}</p>
         {chips.length ? (
-          <div className={`mt-6 flex flex-wrap gap-2 ${align === "center" ? "justify-center" : align === "right" ? "lg:justify-end" : ""}`}>
+          <div className={`mt-6 flex max-w-full flex-wrap gap-2 ${align === "center" ? "justify-center" : align === "right" ? "lg:justify-end" : ""}`}>
             {chips.map((chip, index) => (
-              <span className={`rounded-xl border-2 border-white/35 px-3 py-1 text-xs font-black uppercase tracking-normal text-white shadow-soft backdrop-blur ${index % 4 === 0 ? "bg-safety-blue/75" : index % 4 === 1 ? "bg-safety-teal/75" : index % 4 === 2 ? "bg-safety-red/75" : "bg-safety-gold/80 text-command"}`} key={chip}>
+              <span className={`rounded-xl border-2 border-white/35 px-2.5 py-1 text-[0.68rem] font-black uppercase tracking-normal text-white shadow-soft backdrop-blur sm:px-3 sm:text-xs ${index % 4 === 0 ? "bg-safety-blue/75" : index % 4 === 1 ? "bg-safety-teal/75" : index % 4 === 2 ? "bg-safety-red/75" : "bg-safety-gold/80 text-command"}`} key={chip}>
                 {chip}
               </span>
             ))}
@@ -173,6 +174,20 @@ export function Hero({
           </div>
         ) : null}
       </div>
+
+      {foregroundImage ? (
+        <figure className={`relative z-0 mt-9 w-full max-w-md justify-self-center rounded-[1.35rem] border-[3px] border-dashed border-safety-gold/80 bg-command/70 p-1.5 shadow-lift backdrop-blur sm:max-w-lg sm:rounded-[1.5rem] sm:border-4 sm:p-2 lg:absolute lg:left-[max(1rem,calc((100vw-1180px)/2))] lg:top-1/2 lg:mt-0 lg:w-[min(25vw,360px)] lg:max-w-none lg:-translate-y-1/2 ${foregroundImage.className || ""}`}>
+          <ResponsiveImage
+            alt={foregroundImage.alt}
+            src={foregroundImage.src}
+            webp={foregroundImage.webp}
+            smallWebp={foregroundImage.smallWebp}
+            className="block"
+            imageClassName={`aspect-square w-full rounded-[1rem] object-contain sm:rounded-[1.1rem] ${foregroundImage.imageClassName || ""}`}
+            sizes="(max-width: 640px) 98vw, (max-width: 1024px) 72vw, 31vw"
+          />
+        </figure>
+      ) : null}
     </section>
   );
 }
