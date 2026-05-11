@@ -99,9 +99,21 @@ export function Footer({ onNavigate }) {
         <div className="mx-auto grid max-w-[1220px] gap-10 px-5 py-10 sm:px-6 lg:grid-cols-[1.05fr_1.2fr_auto] lg:px-8">
           <div>
             <a className="group inline-flex max-w-full items-center gap-3 rounded-[1.35rem] border-2 border-dashed border-command/15 bg-white/80 p-3 pr-5 shadow-soft transition hover:-translate-y-0.5 hover:bg-white" href={withRoutePath("/")} onClick={go("/")} aria-label="Hope's Safety Backpack home">
-              <span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-white shadow-[0_7px_0_rgb(12_20_37/0.1)]">
-                <img className="h-14 w-14" src={withBasePath("/assets/logo-mark.svg")} alt="" width="56" height="56" loading="lazy" />
-              </span>
+              <picture className="block h-16 w-16 shrink-0 overflow-hidden rounded-full bg-command shadow-[0_7px_0_rgb(12_20_37/0.1)]">
+                <source
+                  type="image/webp"
+                  srcSet={`${withBasePath("/assets/hope-brand-512.webp")} 512w, ${withBasePath("/assets/hope-brand.webp")} 1038w`}
+                  sizes="64px"
+                />
+                <img
+                  className="h-full w-full object-cover"
+                  src={withBasePath("/assets/hope-brand.webp")}
+                  alt=""
+                  width="64"
+                  height="64"
+                  loading="lazy"
+                />
+              </picture>
               <span className="min-w-0">
                 <span className="block text-xl font-black leading-none text-command">Hope's Safety</span>
                 <span className="mt-1 block text-xl font-black leading-none text-command">Backpack</span>

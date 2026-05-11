@@ -26,10 +26,21 @@ export function Header({ currentPath, onNavigate }) {
   return (
     <header className="sticky top-0 z-50 border-b-4 border-dashed border-safety-gold/45 bg-[#fffaf0]/95 text-command shadow-[0_16px_40px_rgb(12_20_37/0.14)] backdrop-blur-xl">
       <div className="mx-auto flex min-h-[78px] max-w-[1220px] items-center justify-between gap-5 px-4 sm:px-6 lg:px-8">
-        <a className="group flex items-center gap-3" href={withRoutePath("/")} onClick={go("/")} aria-label="Hope's Safety Backpack home">
-          <span className="grid h-14 w-14 place-items-center overflow-hidden rounded-full border-2 border-command/10 bg-white shadow-[0_8px_0_rgb(12_20_37/0.1)] transition group-hover:-translate-y-0.5">
-            <img className="h-12 w-12" src={withBasePath("/assets/logo-mark.svg")} alt="" width="56" height="56" />
-          </span>
+        <a className="group flex shrink-0 items-center gap-3" href={withRoutePath("/")} onClick={go("/")} aria-label="Hope's Safety Backpack home">
+          <picture className="block h-14 w-14 overflow-hidden rounded-full border-2 border-command/10 bg-command shadow-[0_8px_0_rgb(12_20_37/0.1)] transition group-hover:-translate-y-0.5">
+            <source
+              type="image/webp"
+              srcSet={`${withBasePath("/assets/hope-brand-512.webp")} 512w, ${withBasePath("/assets/hope-brand.webp")} 1038w`}
+              sizes="56px"
+            />
+            <img
+              className="h-full w-full object-cover"
+              src={withBasePath("/assets/hope-brand.webp")}
+              alt=""
+              width="56"
+              height="56"
+            />
+          </picture>
           <span className="hidden sm:block">
             <span className="block text-sm font-black uppercase leading-none tracking-normal text-command">Hope's Safety</span>
             <span className="mt-1 block text-xs font-bold uppercase tracking-normal text-safety-red">Backpack idea board</span>
