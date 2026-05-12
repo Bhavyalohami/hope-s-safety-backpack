@@ -105,6 +105,22 @@ export function SectionHeader({ eyebrow, title, text, align = "left", tone = "li
   );
 }
 
+export function KidNote({ children, color = "yellow", className = "" }) {
+  const colors = {
+    yellow: "border-safety-gold/70 bg-yellow-100 text-command",
+    blue: "border-safety-blue/45 bg-cyan-100 text-command",
+    red: "border-safety-red/40 bg-red-100 text-command",
+    green: "border-safety-teal/45 bg-green-100 text-command",
+  };
+
+  return (
+    <div className={`relative w-fit max-w-md rotate-[-1.5deg] rounded-[1rem] border-4 border-dashed p-4 text-lg font-black leading-snug shadow-[0_10px_0_rgb(12_20_37/0.1)] ${colors[color] || colors.yellow} ${className}`}>
+      <span className="absolute left-5 top-0 h-5 w-14 -translate-y-1/2 rotate-[-7deg] rounded-sm bg-white/70 shadow-soft" aria-hidden="true" />
+      {children}
+    </div>
+  );
+}
+
 export function Hero({
   eyebrow,
   title,

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FileText, Lock, Mail, Send, ShieldCheck, Siren } from "lucide-react";
 import { faqs } from "../data.js";
-import { ButtonLink, Hero, Reveal, SectionHeader } from "../components/ui.jsx";
+import { ButtonLink, Hero, KidNote, Reveal, SectionHeader } from "../components/ui.jsx";
 import { withBasePath } from "../paths.js";
 
 const FORM_SUBMIT_RECIPIENT = "bhavyalohami@gmail.com";
@@ -267,6 +267,9 @@ export default function Forms({ onNavigate }) {
               title="Application and preorder paths in one place."
               text="Families can review the information needed for either path, then use the downloadable forms or contact the team for the next step."
             />
+            <KidNote className="mb-5" color="yellow">
+              Preorder without paying at time of checkout
+            </KidNote>
             <div className="mb-5 inline-flex rounded-full border-2 border-command/10 bg-white p-1 shadow-soft" role="tablist" aria-label="Form selector">
               <button
                 className={`min-h-10 min-w-32 rounded-full px-4 py-2 font-black ${active === "ambassador" ? "bg-command text-white" : "text-muted"}`}
@@ -331,6 +334,25 @@ export default function Forms({ onNavigate }) {
             Review Features
           </ButtonLink>
         </div>
+      </Reveal>
+
+      <Reveal as="section" className="mx-auto max-w-[1224px] px-5 pb-20 pt-4 sm:px-8 lg:pb-28">
+        <article className="kid-paper rounded-[2rem] border-4 border-dashed border-safety-gold/70 p-7 text-command shadow-lift sm:p-10">
+          <KidNote className="mb-7 rotate-1" color="blue">
+            Investment opportunity available please schedule investment interview
+          </KidNote>
+          <p className="mb-3 inline-flex rounded-full bg-safety-gold px-3 py-1 text-xs font-black uppercase tracking-normal text-command">Contact Us</p>
+          <h2 className="text-balance text-3xl font-black leading-tight text-ink sm:text-4xl">Hope's Financial Commitment to Kids</h2>
+          <div className="mt-6 grid gap-5 text-lg font-bold leading-8 text-body">
+            <p>Hello, my name is Hope Herron, and I'm excited to share an opportunity designed to help kids earn extra money while promoting safety in their communities.</p>
+            <p>To get started, interested participants should visit the Sales Ambassador Application page. With the assistance of a parent or guardian, complete and submit the application.</p>
+            <p>Here's how the program works: once you purchase your personal backpack, you will have a product to demonstrate and share with others. While the current retail price of the backpack is not listed, participants earn a 15% commission on each sale. For example, if a backpack is priced at $200, you would earn $60 per sale.</p>
+            <p>This innovative backpack, featuring LED lighting and advanced safety elements, is designed to stand out and spark interest within your school, church, and local community. There is no need to manage or store inventory. Instead, each participant receives a unique referral code to share with customers. This code allows us to track your sales and ensure you receive proper credit.</p>
+            <p>Parents are also encouraged to participate. This opportunity is not limited to children--families can work together to earn additional income while supporting a meaningful cause. After purchasing a personal backpack, you will receive a comprehensive video tutorial and a step-by-step sales guide to help you effectively promote the product and its safety benefits.</p>
+            <p>We invite you to complete the application and join us in our mission to help keep children safe around the world.</p>
+            <p>Sincerely,<br />Hope Herron</p>
+          </div>
+        </article>
       </Reveal>
     </main>
   );

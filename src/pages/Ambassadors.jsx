@@ -1,5 +1,5 @@
 import { Backpack, CheckCircle2, ClipboardCheck, Lock, Medal, Smile, Star, Users } from "lucide-react";
-import { ButtonLink, CardGrid, CTASection, Checklist, Hero, Reveal, SectionHeader } from "../components/ui.jsx";
+import { ButtonLink, CardGrid, CTASection, Checklist, Hero, KidNote, Reveal, SectionHeader } from "../components/ui.jsx";
 
 const steps = [
   {
@@ -114,6 +114,9 @@ export default function Ambassadors({ onNavigate }) {
         title="Keep the next step simple for families."
         text="Families can review the application path, preorder interest, and supporting documents in one place."
       >
+        <KidNote className="rotate-1" color="green">
+          Investment opportunity available please schedule investment interview
+        </KidNote>
         <ButtonLink href="/forms" onNavigate={onNavigate} icon={Medal}>
           Open Applications
         </ButtonLink>

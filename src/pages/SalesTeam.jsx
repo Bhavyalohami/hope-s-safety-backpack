@@ -1,6 +1,6 @@
 import { ClipboardList, Mail, PackageCheck, Presentation, School, ShieldCheck } from "lucide-react";
 import { agendaItems } from "../data.js";
-import { ButtonLink, CardGrid, CTASection, Hero, Reveal, SectionHeader } from "../components/ui.jsx";
+import { ButtonLink, CardGrid, CTASection, Hero, KidNote, Reveal, SectionHeader } from "../components/ui.jsx";
 
 const agendaIcons = [Presentation, PackageCheck, ClipboardList, School, Mail, ShieldCheck];
 const agendaCards = agendaItems.map(([title, text], index) => ({ title, text, icon: agendaIcons[index] }));
@@ -71,6 +71,9 @@ export default function SalesTeam({ onNavigate }) {
             text="The playbook focuses on official channels, approved events, transparent codes, and family communication."
           />
           <div className="grid gap-3">
+            <KidNote className="rotate-1" color="blue">
+              Investment opportunity available please schedule investment interview
+            </KidNote>
             {[
               ["Ask permission first", "Respect school policies, parent guidance, and event boundaries before sharing."],
               ["Use one bright story", "Lead with student confidence, then explain visibility, readiness, and support features."],

@@ -12,7 +12,7 @@ import {
   Zap,
 } from "lucide-react";
 import { safetyFeatures } from "../data.js";
-import { ButtonLink, CardGrid, CTASection, Hero, Reveal, SectionHeader } from "../components/ui.jsx";
+import { ButtonLink, CardGrid, CTASection, Hero, KidNote, Reveal, SectionHeader } from "../components/ui.jsx";
 
 const icons = [Camera, Zap, BatteryCharging, Cross, Waves, MapPin, Flashlight, Shield];
 const featureCards = safetyFeatures.map(([title, text], index) => ({ title, text, icon: icons[index] }));
@@ -112,6 +112,9 @@ export default function Features({ onNavigate }) {
           </div>
           <div className="rounded-[2rem] border-4 border-dashed border-safety-blue/50 bg-white p-5 shadow-lift" aria-label="Feature sketch cards">
             <p className="mb-5 w-fit rotate-1 rounded-lg bg-safety-gold px-4 py-2 text-sm font-black uppercase text-command shadow-soft">Hope's sketch notes</p>
+            <KidNote className="mb-5 rotate-2" color="yellow">
+              Preorder without paying at time of checkout
+            </KidNote>
             <div className="grid gap-3">
               {sketchCards.map(([number, title, text], index) => (
                 <article

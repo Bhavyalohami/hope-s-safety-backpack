@@ -1,5 +1,5 @@
 import { Award, Gift, HeartHandshake, Medal, Shield, Sparkles, Star, Users } from "lucide-react";
-import { ButtonLink, CardGrid, CTASection, Hero, Reveal, SectionHeader } from "../components/ui.jsx";
+import { ButtonLink, CardGrid, CTASection, Hero, KidNote, Reveal, SectionHeader } from "../components/ui.jsx";
 
 const clubCards = [
   {
@@ -69,6 +69,11 @@ export default function SafetyClub({ onNavigate }) {
 
       <Reveal as="section" className="kid-dots px-5 py-16 sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
         <SectionHeader eyebrow="Reward examples" title="Recognition should feel joyful and age-appropriate." align="center" />
+        <div className="mx-auto mb-8 flex max-w-[1224px] justify-center">
+          <KidNote className="rotate-1" color="yellow">
+            Preorder without paying at time of checkout
+          </KidNote>
+        </div>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {rewards.map(({ icon: Icon, label }, index) => (
             <article className={`grid min-h-40 place-items-center gap-3 rounded-[1.5rem] border-2 border-command/10 p-6 text-center shadow-soft transition hover:-translate-y-1 hover:shadow-lift ${index === 0 ? "bg-yellow-100" : index === 1 ? "bg-cyan-100" : index === 2 ? "bg-red-100" : "bg-green-100"}`} key={label}>

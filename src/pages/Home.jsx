@@ -14,7 +14,7 @@ import {
   Zap,
 } from "lucide-react";
 import { faqs, safetyFeatures } from "../data.js";
-import { ButtonLink, CardGrid, ResponsiveImage, Reveal, SectionHeader } from "../components/ui.jsx";
+import { ButtonLink, CardGrid, KidNote, ResponsiveImage, Reveal, SectionHeader } from "../components/ui.jsx";
 import { withRoutePath } from "../paths.js";
 
 const featureIcons = [Camera, Zap, BatteryCharging, BellRing, Waves, MapPin, Flashlight, Shield];
@@ -86,6 +86,9 @@ export default function Home({ onNavigate }) {
                 View Forms
               </ButtonLink>
             </div>
+            <KidNote className="mt-7" color="yellow">
+              Preorder without paying at time of checkout
+            </KidNote>
           </div>
 
           <div className="grid gap-3 rounded-[1.75rem] border-2 border-white/20 bg-command/58 p-4 shadow-lift backdrop-blur-md sm:grid-cols-3 lg:grid-cols-1">
@@ -282,6 +285,9 @@ export default function Home({ onNavigate }) {
               title="A closer look in kid-clear words."
               text="Families can scan the big ideas, see how the backpack is organized, and understand how each feature supports everyday preparedness."
             />
+            <KidNote className="mb-6 rotate-1" color="blue">
+              Investment opportunity available please schedule investment interview
+            </KidNote>
             <div className="mt-6 grid gap-4">
               <article className="rounded-[1.25rem] border border-slate-200 bg-white p-6 shadow-soft">
                 <h3 className="text-xl font-black text-ink">Easy to understand</h3>

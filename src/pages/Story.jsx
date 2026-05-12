@@ -1,5 +1,5 @@
 import { HeartHandshake, Lightbulb, Megaphone, Shield, Sparkles } from "lucide-react";
-import { ButtonLink, CardGrid, CTASection, Hero, Reveal, SectionHeader } from "../components/ui.jsx";
+import { ButtonLink, CardGrid, CTASection, Hero, KidNote, Reveal, SectionHeader } from "../components/ui.jsx";
 
 const values = [
   {
@@ -106,6 +106,9 @@ export default function Story({ onNavigate }) {
         title="See how the mission becomes a student program."
         text="The helper page turns Hope's safety idea into a supervised opportunity for communication, confidence, and kindness."
       >
+        <KidNote className="rotate-1" color="blue">
+          Investment opportunity available please schedule investment interview
+        </KidNote>
         <ButtonLink href="/ambassadors" onNavigate={onNavigate} icon={Sparkles}>
           View Helpers
         </ButtonLink>
