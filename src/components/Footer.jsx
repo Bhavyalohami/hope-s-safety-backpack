@@ -36,7 +36,7 @@ const footerGroups = [
   },
 ];
 
-export function Footer({ onNavigate }) {
+export function Footer({ hideReminder = false, onNavigate }) {
   const go = (path) => (event) => {
     event.preventDefault();
     onNavigate(path);
@@ -48,52 +48,54 @@ export function Footer({ onNavigate }) {
       <div className="absolute -right-24 top-20 h-52 w-52 rotate-12 rounded-[3rem] border-4 border-dashed border-safety-blue/25 bg-white/45" aria-hidden="true" />
       <div className="absolute -left-20 bottom-20 h-44 w-44 -rotate-12 rounded-full border-4 border-dashed border-safety-red/25 bg-yellow-100/60" aria-hidden="true" />
 
-      <section className="relative mx-auto max-w-[1220px] px-5 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="kid-paper rounded-[2rem] border-4 border-dashed border-safety-blue/35 p-7 shadow-lift sm:p-10">
-            <p className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-safety-gold/70 bg-yellow-100 px-3 py-1 text-xs font-black uppercase tracking-normal text-safety-red">
-              <ShieldCheck size={15} aria-hidden="true" />
-              Hope's reminder
-            </p>
-            <h2 className="max-w-3xl text-balance text-4xl font-black leading-[1.03] sm:text-5xl lg:text-6xl">
-              Big safety ideas can start with one brave kid question.
-            </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-body">
-              Hope's Safety Backpack brings lights, care supplies, family support, and kindness into one bright school-day idea.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-command bg-gradient-to-r from-safety-red to-safety-orange px-5 py-3 text-sm font-black text-white shadow-[0_8px_0_rgb(12_20_37/0.16)] transition hover:-translate-y-0.5"
-                href={withRoutePath("/forms")}
-                onClick={go("/forms")}
-              >
-                Request Information
-                <ArrowRight size={17} aria-hidden="true" />
-              </a>
-              <a
-                className="inline-flex min-h-12 items-center justify-center rounded-full border-2 border-command bg-white px-5 py-3 text-sm font-black text-command shadow-[0_8px_0_rgb(12_20_37/0.1)] transition hover:-translate-y-0.5"
-                href={withRoutePath("/story")}
-                onClick={go("/story")}
-              >
-                Read Hope's Story
-              </a>
+      {!hideReminder ? (
+        <section className="relative mx-auto max-w-[1220px] px-5 py-16 sm:px-6 lg:px-8">
+          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="kid-paper rounded-[2rem] border-4 border-dashed border-safety-blue/35 p-7 shadow-lift sm:p-10">
+              <p className="mb-4 inline-flex items-center gap-2 rounded-full border-2 border-safety-gold/70 bg-yellow-100 px-3 py-1 text-xs font-black uppercase tracking-normal text-safety-red">
+                <ShieldCheck size={15} aria-hidden="true" />
+                Hope's reminder
+              </p>
+              <h2 className="max-w-3xl text-balance text-4xl font-black leading-[1.03] sm:text-5xl lg:text-6xl">
+                Big safety ideas can start with one brave kid question.
+              </h2>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-body">
+                Hope's Safety Backpack brings lights, care supplies, family support, and kindness into one bright school-day idea.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-command bg-gradient-to-r from-safety-red to-safety-orange px-5 py-3 text-sm font-black text-white shadow-[0_8px_0_rgb(12_20_37/0.16)] transition hover:-translate-y-0.5"
+                  href={withRoutePath("/forms")}
+                  onClick={go("/forms")}
+                >
+                  Request Information
+                  <ArrowRight size={17} aria-hidden="true" />
+                </a>
+                <a
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border-2 border-command bg-white px-5 py-3 text-sm font-black text-command shadow-[0_8px_0_rgb(12_20_37/0.1)] transition hover:-translate-y-0.5"
+                  href={withRoutePath("/story")}
+                  onClick={go("/story")}
+                >
+                  Read Hope's Story
+                </a>
+              </div>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+              {[
+                ["Be seen", "Bright cues make the safety story easy to notice."],
+                ["Be ready", "Helpful supplies stay central to the school-day idea."],
+                ["Be kind", "Programs help students practice courage and leadership."],
+              ].map(([title, text], index) => (
+                <article className={`rounded-[1.5rem] border-2 border-command/10 p-6 shadow-soft ${index === 0 ? "bg-cyan-100" : index === 1 ? "bg-yellow-100" : "bg-green-100"}`} key={title}>
+                  <span className="block text-3xl font-black text-command">{title}</span>
+                  <p className="mt-2 text-sm font-bold leading-6 text-body">{text}</p>
+                </article>
+              ))}
             </div>
           </div>
-
-          <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-            {[
-              ["Be seen", "Bright cues make the safety story easy to notice."],
-              ["Be ready", "Helpful supplies stay central to the school-day idea."],
-              ["Be kind", "Programs help students practice courage and leadership."],
-            ].map(([title, text], index) => (
-              <article className={`rounded-[1.5rem] border-2 border-command/10 p-6 shadow-soft ${index === 0 ? "bg-cyan-100" : index === 1 ? "bg-yellow-100" : "bg-green-100"}`} key={title}>
-                <span className="block text-3xl font-black text-command">{title}</span>
-                <p className="mt-2 text-sm font-bold leading-6 text-body">{text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
       <section className="relative border-t-4 border-dashed border-command/10 bg-white/70">
         <div className="mx-auto grid max-w-[1220px] gap-10 px-5 py-10 sm:px-6 lg:grid-cols-[1.05fr_1.2fr_auto] lg:px-8">
