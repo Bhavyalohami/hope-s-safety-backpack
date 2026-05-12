@@ -1,7 +1,6 @@
 export const site = {
   name: "Hope's Safety Backpack",
-  url: "https://bhavyalohami.github.io/hope-s-safety-backpack",
-  email: "hello@hopessafetybackpack.com",
+  email: "hopeherronsafetybackpack77@yahoo.com",
   description:
     "Hope's Safety Backpack is a student safety backpack concept created by Hope Herron to help kids feel protected, visible, prepared, and confident at school.",
   ogImage: "/assets/home-story-hero.webp",
@@ -30,7 +29,7 @@ export const routeMeta = {
       brand: { "@type": "Brand", name: "Hope's Safety Backpack" },
       description:
         "A student safety backpack concept combining visibility, emergency preparedness, GPS support, and student confidence programs.",
-      image: "https://bhavyalohami.github.io/hope-s-safety-backpack/assets/home-story-hero.webp",
+      image: "/assets/home-story-hero.webp",
       category: "Student safety backpack",
     },
   },

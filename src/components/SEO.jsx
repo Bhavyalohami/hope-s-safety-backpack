@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { faqs, routeMeta, site } from "../data.js";
+import { BASE_PATH, withBasePath } from "../paths.js";
 
 function upsertMeta(selector, createAttrs, valueAttr, value) {
   let element = document.head.querySelector(selector);
@@ -25,24 +26,43 @@ function upsertCanonical(href) {
   element.setAttribute("href", href);
 }
 
-function buildSchema(path, meta) {
-  const canonical = `${site.url}${path === "/" ? "" : path}`;
+function getSiteUrl() {
+  const configuredUrl = typeof __SITE_URL__ === "string" ? __SITE_URL__ : "";
+  if (configuredUrl) return configuredUrl;
+  if (typeof window === "undefined") return "";
+  return `${window.location.origin}${BASE_PATH}`;
+}
+
+function absolutizeUrl(siteUrl, path) {
+  if (!path) return siteUrl;
+  if (/^https?:\/\//i.test(path)) return path;
+  return `${siteUrl}${withBasePath(path)}`;
+}
+
+function buildSchema(path, meta, siteUrl) {
+  const canonical = `${siteUrl}${path === "/" ? "" : path}`;
+  const schema = meta.schema
+    ? {
+        ...meta.schema,
+        ...(meta.schema.image ? { image: absolutizeUrl(siteUrl, meta.schema.image) } : {}),
+      }
+    : null;
   const organization = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: site.name,
-    url: site.url,
+    url: siteUrl,
     email: site.email,
-    logo: `${site.url}/assets/brand-logo.svg`,
+    logo: absolutizeUrl(siteUrl, "/assets/brand-logo.svg"),
   };
   const website = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: site.name,
-    url: site.url,
+    url: siteUrl,
     potentialAction: {
       "@type": "SearchAction",
-      target: `${site.url}/features?search={search_term_string}`,
+      target: `${siteUrl}/features?search={search_term_string}`,
       "query-input": "required name=search_term_string",
     },
   };
@@ -52,7 +72,7 @@ function buildSchema(path, meta) {
     name: meta.title,
     description: meta.description,
     url: canonical,
-    isPartOf: { "@type": "WebSite", name: site.name, url: site.url },
+    isPartOf: { "@type": "WebSite", name: site.name, url: siteUrl },
   };
   const faqSchema =
     path === "/" || path === "/forms"
@@ -67,7 +87,7 @@ function buildSchema(path, meta) {
         }
       : null;
 
-  return [organization, website, page, meta.schema].concat(faqSchema ? [faqSchema] : []).filter(Boolean);
+  return [organization, website, page, schema].concat(faqSchema ? [faqSchema] : []).filter(Boolean);
 }
 
 export function SEO({ path }) {
@@ -79,8 +99,9 @@ export function SEO({ path }) {
     };
     const cleanPath = aliases[path] || path;
     const meta = routeMeta[cleanPath] || routeMeta["/"];
-    const canonical = `${site.url}${cleanPath === "/" ? "" : cleanPath}`;
-    const imageUrl = `${site.url}${site.ogImage}`;
+    const siteUrl = getSiteUrl();
+    const canonical = `${siteUrl}${cleanPath === "/" ? "" : cleanPath}`;
+    const imageUrl = absolutizeUrl(siteUrl, site.ogImage);
 
     document.title = meta.title;
     upsertMeta("meta[name='description']", { name: "description" }, "content", meta.description);
@@ -102,7 +123,7 @@ export function SEO({ path }) {
       script.dataset.schema = "hopes-safety";
       document.head.appendChild(script);
     }
-    script.textContent = JSON.stringify(buildSchema(cleanPath, meta));
+    script.textContent = JSON.stringify(buildSchema(cleanPath, meta, siteUrl));
   }, [path]);
 
   return null;
