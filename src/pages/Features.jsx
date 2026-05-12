@@ -100,7 +100,7 @@ export default function Features({ onNavigate }) {
         <CardGrid items={featureCards} columns="four" />
       </Reveal>
 
-      <Reveal as="section" className="bg-[#fff7ed] px-5 py-16 text-command sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
+      <Reveal as="section" className="reveal-sticky-safe bg-[#fff7ed] px-5 py-16 text-command sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
         <div className="grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <SectionHeader
@@ -110,7 +110,7 @@ export default function Features({ onNavigate }) {
             />
             <CardGrid items={layers} columns="two" />
           </div>
-          <div className="rounded-[2rem] border-4 border-dashed border-safety-blue/50 bg-white p-5 shadow-lift" aria-label="Feature sketch cards">
+          <div className="rounded-[2rem] border-4 border-dashed border-safety-blue/50 bg-white p-5 shadow-lift lg:sticky lg:top-28 lg:self-start" aria-label="Feature sketch cards">
             <p className="mb-5 w-fit rotate-1 rounded-lg bg-safety-gold px-4 py-2 text-sm font-black uppercase text-command shadow-soft">Hope's sketch notes</p>
             <KidNote className="mb-5 rotate-2" color="yellow">
               Preorder without paying at time of checkout

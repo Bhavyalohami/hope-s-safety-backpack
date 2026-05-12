@@ -245,7 +245,7 @@ export default function Forms({ onNavigate }) {
         chips={["Applications", "Preorders", "Helpful papers"]}
       />
 
-      <Reveal as="section" className="kid-dots px-5 py-16 sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
+      <Reveal as="section" className="reveal-sticky-safe kid-dots px-5 py-16 sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
         <div className="grid items-start gap-8 lg:grid-cols-[0.38fr_0.62fr]">
           <aside className="kid-paper hidden rounded-[2rem] border-4 border-dashed border-safety-gold/60 p-7 text-command shadow-lift lg:sticky lg:top-24 lg:block" aria-label="Form guidance">
             <p className="mb-3 inline-flex rounded-full bg-safety-gold px-3 py-1 text-xs font-black uppercase tracking-normal text-command">Family guidance</p>

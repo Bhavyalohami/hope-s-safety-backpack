@@ -107,16 +107,17 @@ export function SectionHeader({ eyebrow, title, text, align = "left", tone = "li
 
 export function KidNote({ children, color = "yellow", className = "" }) {
   const colors = {
-    yellow: "border-safety-gold/70 bg-yellow-100 text-command",
-    blue: "border-safety-blue/45 bg-cyan-100 text-command",
-    red: "border-safety-red/40 bg-red-100 text-command",
-    green: "border-safety-teal/45 bg-green-100 text-command",
+    yellow: "border-safety-gold/75 bg-gradient-to-br from-yellow-50 via-yellow-100 to-white text-command",
+    blue: "border-safety-blue/45 bg-gradient-to-br from-cyan-50 via-cyan-100 to-white text-command",
+    red: "border-safety-red/45 bg-gradient-to-br from-red-50 via-red-100 to-white text-command",
+    green: "border-safety-teal/45 bg-gradient-to-br from-green-50 via-green-100 to-white text-command",
   };
 
   return (
-    <div className={`relative w-fit max-w-md rotate-[-1.5deg] rounded-[1rem] border-4 border-dashed p-4 text-lg font-black leading-snug shadow-[0_10px_0_rgb(12_20_37/0.1)] ${colors[color] || colors.yellow} ${className}`}>
-      <span className="absolute left-5 top-0 h-5 w-14 -translate-y-1/2 rotate-[-7deg] rounded-sm bg-white/70 shadow-soft" aria-hidden="true" />
-      {children}
+    <div className={`relative w-fit max-w-md rotate-[-1.5deg] rounded-[1rem] border-[3px] border-dashed px-4 py-3 text-base font-black leading-snug shadow-[0_8px_0_rgb(12_20_37/0.08),0_18px_34px_rgb(12_20_37/0.11)] sm:text-lg ${colors[color] || colors.yellow} ${className}`}>
+      <span className="absolute left-6 top-0 h-5 w-16 -translate-y-1/2 rotate-[-6deg] rounded-sm border border-safety-gold/20 bg-white/75 shadow-soft" aria-hidden="true" />
+      <span className="pointer-events-none absolute inset-x-4 bottom-3 top-7 rounded-[0.85rem] bg-[repeating-linear-gradient(180deg,transparent_0_24px,rgb(12_20_37/0.055)_25px_26px)]" aria-hidden="true" />
+      <span className="relative block">{children}</span>
     </div>
   );
 }

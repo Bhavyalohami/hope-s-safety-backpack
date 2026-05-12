@@ -63,14 +63,14 @@ export default function SalesTeam({ onNavigate }) {
         </div>
       </Reveal>
 
-      <Reveal as="section" className="kid-dots px-5 py-16 sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
+      <Reveal as="section" className="reveal-sticky-safe kid-dots px-5 py-16 sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
         <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
           <SectionHeader
             eyebrow="Permission-first"
             title="The best helper system protects the student experience."
             text="The playbook focuses on official channels, approved events, transparent codes, and family communication."
           />
-          <div className="grid gap-3">
+          <div className="grid gap-3 lg:sticky lg:top-28 lg:self-start">
             <KidNote className="rotate-1" color="blue">
               Investment opportunity available please schedule investment interview
             </KidNote>

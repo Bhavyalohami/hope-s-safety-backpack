@@ -252,7 +252,7 @@ export default function Home({ onNavigate }) {
         </div>
       </Reveal>
 
-      <Reveal as="section" className="px-5 py-16 sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
+      <Reveal as="section" className="reveal-sticky-safe px-5 py-16 sm:px-8 lg:px-[max(2rem,calc((100vw-1180px)/2+2rem))] lg:py-24">
         <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
           <div className="rounded-[2rem] border-4 border-dashed border-safety-gold/70 bg-white/92 p-5 shadow-lift backdrop-blur sm:p-7" aria-label="Hope's idea board">
             <div className="rounded-[1.5rem] bg-gradient-to-br from-sky-50 via-white to-yellow-50 p-5">
@@ -279,7 +279,7 @@ export default function Home({ onNavigate }) {
               </div>
             </div>
           </div>
-          <div className="rounded-[2rem] border-2 border-white/18 bg-white/90 p-6 text-command shadow-lift backdrop-blur-md sm:p-8">
+          <div className="rounded-[2rem] border-2 border-white/18 bg-white/90 p-6 text-command shadow-lift backdrop-blur-md sm:p-8 lg:sticky lg:top-28 lg:self-start">
             <SectionHeader
               eyebrow="Backpack notes"
               title="A closer look in kid-clear words."
