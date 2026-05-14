@@ -4,7 +4,7 @@ import { faqs } from "../data.js";
 import { ButtonLink, Hero, KidNote, Reveal, SectionHeader } from "../components/ui.jsx";
 import { withBasePath } from "../paths.js";
 
-const FORM_SUBMIT_RECIPIENT = typeof __FORM_SUBMIT_RECIPIENT__ === "string" ? __FORM_SUBMIT_RECIPIENT__ : "hopeherronsafetybackpack77@yahoo.com";
+const FORM_SUBMIT_RECIPIENT = "hopeherronsafetybackpack77@yahoo.com";
 const FORM_SUBMIT_ENDPOINT = `https://formsubmit.co/${FORM_SUBMIT_RECIPIENT}`;
 const FORM_POST_SETTLE_DELAY = 1400;
 

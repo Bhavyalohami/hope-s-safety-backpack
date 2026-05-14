@@ -11,7 +11,6 @@ export default (env = {}) => {
   const publicPath = env.githubPages ? "/hope-s-safety-backpack/" : process.env.PUBLIC_PATH || "/";
   const basePath = publicPath === "/" ? "" : publicPath.replace(/\/+$/, "");
   const siteUrl = (process.env.SITE_URL || "").replace(/\/+$/, "");
-  const formSubmitRecipient = process.env.FORM_SUBMIT_RECIPIENT || "hopeherronsafetybackpack77@yahoo.com";
 
   return {
   entry: path.resolve(__dirname, "src/main.jsx"),
@@ -49,7 +48,6 @@ export default (env = {}) => {
     new webpack.DefinePlugin({
       __BASE_PATH__: JSON.stringify(publicPath),
       __SITE_URL__: JSON.stringify(siteUrl),
-      __FORM_SUBMIT_RECIPIENT__: JSON.stringify(formSubmitRecipient),
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "index.html"),
