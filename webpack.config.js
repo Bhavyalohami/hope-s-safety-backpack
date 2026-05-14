@@ -11,6 +11,7 @@ export default (env = {}) => {
   const publicPath = env.githubPages ? "/hope-s-safety-backpack/" : process.env.PUBLIC_PATH || "/";
   const basePath = publicPath === "/" ? "" : publicPath.replace(/\/+$/, "");
   const siteUrl = (process.env.SITE_URL || "").replace(/\/+$/, "");
+  const web3FormsAccessKey = process.env.WEB3FORMS_ACCESS_KEY || "";
 
   return {
   entry: path.resolve(__dirname, "src/main.jsx"),
@@ -48,6 +49,7 @@ export default (env = {}) => {
     new webpack.DefinePlugin({
       __BASE_PATH__: JSON.stringify(publicPath),
       __SITE_URL__: JSON.stringify(siteUrl),
+      __WEB3FORMS_ACCESS_KEY__: JSON.stringify(web3FormsAccessKey),
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "index.html"),

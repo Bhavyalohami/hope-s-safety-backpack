@@ -4,26 +4,40 @@ import { faqs } from "../data.js";
 import { ButtonLink, Hero, KidNote, Reveal, SectionHeader } from "../components/ui.jsx";
 import { withBasePath } from "../paths.js";
 
-const FORM_SUBMIT_RECIPIENT = "hopesafetybackpackcompany@gmail.com";
-const FORM_SUBMIT_ENDPOINT = `https://formsubmit.co/${FORM_SUBMIT_RECIPIENT}`;
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+const WEB3FORMS_ACCESS_KEY =
+  typeof __WEB3FORMS_ACCESS_KEY__ === "string" ? __WEB3FORMS_ACCESS_KEY__.trim() : "";
+
+function getFormRedirectUrl() {
+  if (typeof window === "undefined") {
+    return "https://www.hopessafetybackpack.com/forms?submitted=success";
+  }
+
+  return `${window.location.origin}/forms?submitted=success`;
+}
 
 function InterestForm({ type }) {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(() =>
+    typeof window !== "undefined" && new URLSearchParams(window.location.search).get("submitted") === "success"
+      ? "Thank you. Your details were sent successfully."
+      : ""
+  );
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const isPreorder = type === "preorder";
   const formType = isPreorder ? "Backpack Preorder Interest" : "Helper Application Interest";
 
   return (
     <form
-      action={FORM_SUBMIT_ENDPOINT}
+      action={WEB3FORMS_ENDPOINT}
       className="kid-paper rounded-[2rem] border-4 border-dashed border-safety-blue/35 p-6 shadow-soft sm:p-7"
       method="POST"
       onSubmit={(event) => {
         const form = event.currentTarget;
         const formData = new FormData(form);
         const email = String(formData.get("email") || "").trim();
-        const honeypot = String(formData.get("hp_email") || "").trim();
+        const botcheck = formData.get("botcheck");
 
-        if (honeypot) {
+        if (botcheck) {
           event.preventDefault();
           setMessage("Thank you. Your details were received.");
           form.reset();
@@ -33,13 +47,23 @@ function InterestForm({ type }) {
         if (!email) {
           event.preventDefault();
           setMessage("Please add an email address so we can send your details.");
+          return;
         }
+
+        if (!WEB3FORMS_ACCESS_KEY) {
+          event.preventDefault();
+          setMessage("We could not send the form right now. Please email the team directly.");
+          return;
+        }
+
+        setIsSubmitting(true);
+        setMessage("");
       }}
     >
-      <input type="hidden" name="_subject" value={`Hope's Safety Backpack: ${formType}`} />
-      <input type="hidden" name="_template" value="box" />
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_honey" value="" />
+      <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+      <input type="hidden" name="subject" value={`Hope's Safety Backpack: ${formType}`} />
+      <input type="hidden" name="from_name" value="Hope's Safety Backpack Website" />
+      <input type="hidden" name="redirect" value={getFormRedirectUrl()} />
       <input type="hidden" name="Form Type" value={formType} />
       <input type="hidden" name="Submitted From" value="Hope's Safety Backpack website" />
 
@@ -110,12 +134,12 @@ function InterestForm({ type }) {
       <div className="hidden" aria-hidden="true">
         <label>
           Leave this field blank
-          <input type="text" name="hp_email" tabIndex="-1" autoComplete="off" />
+          <input type="checkbox" name="botcheck" tabIndex="-1" autoComplete="off" />
         </label>
       </div>
 
-      <button className="mt-4 inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-command bg-gradient-to-r from-safety-red to-safety-orange px-5 py-3 text-sm font-black leading-none text-white shadow-[0_8px_0_rgb(12_20_37/0.16)] transition hover:-translate-y-0.5 hover:shadow-lift sm:w-auto" type="submit">
-        <span>{isPreorder ? "Send Preorder Details" : "Send Application Details"}</span>
+      <button className="mt-4 inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-command bg-gradient-to-r from-safety-red to-safety-orange px-5 py-3 text-sm font-black leading-none text-white shadow-[0_8px_0_rgb(12_20_37/0.16)] transition hover:-translate-y-0.5 hover:shadow-lift disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto" type="submit" disabled={isSubmitting}>
+        <span>{isSubmitting ? "Sending..." : isPreorder ? "Send Preorder Details" : "Send Application Details"}</span>
         <Send size={17} aria-hidden="true" />
       </button>
       {message ? <p className="mt-4 font-black text-green-700" role="status">{message}</p> : null}
