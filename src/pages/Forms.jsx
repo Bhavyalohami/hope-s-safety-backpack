@@ -4,7 +4,7 @@ import { faqs } from "../data.js";
 import { ButtonLink, Hero, KidNote, Reveal, SectionHeader } from "../components/ui.jsx";
 import { withBasePath } from "../paths.js";
 
-const FORM_SUBMIT_RECIPIENT = "hopeherronsafetybackpack77@yahoo.com";
+const FORM_SUBMIT_RECIPIENT = "hopesafetybackpackcompany@gmail.com";
 const FORM_SUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${FORM_SUBMIT_RECIPIENT}`;
 
 function cleanValue(value, fallback = "Not provided") {

@@ -1,6 +1,6 @@
 export const site = {
   name: "Hope's Safety Backpack",
-  email: "hopeherronsafetybackpack77@yahoo.com",
+  email: "hopesafetybackpackcompany@gmail.com",
   description:
     "Hope's Safety Backpack is a student safety backpack concept created by Hope Herron to help kids feel protected, visible, prepared, and confident at school.",
   ogImage: "/assets/home-story-hero.webp",
