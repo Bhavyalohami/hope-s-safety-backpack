@@ -5,50 +5,28 @@ import { ButtonLink, Hero, KidNote, Reveal, SectionHeader } from "../components/
 import { withBasePath } from "../paths.js";
 
 const FORM_SUBMIT_RECIPIENT = "hopeherronsafetybackpack77@yahoo.com";
-const FORM_SUBMIT_ENDPOINT = `https://formsubmit.co/${FORM_SUBMIT_RECIPIENT}`;
-const FORM_POST_SETTLE_DELAY = 1400;
-
-function createHiddenInput(name, value) {
-  const input = document.createElement("input");
-  input.type = "hidden";
-  input.name = name;
-  input.value = value;
-  return input;
-}
+const FORM_SUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${FORM_SUBMIT_RECIPIENT}`;
 
 function cleanValue(value, fallback = "Not provided") {
   const trimmed = String(value || "").trim();
   return trimmed || fallback;
 }
 
-function postToFormSubmit(fields) {
-  return new Promise((resolve) => {
-    const id = `formsubmit-frame-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    const iframe = document.createElement("iframe");
-    iframe.name = id;
-    iframe.title = "Form submission";
-    iframe.style.display = "none";
-
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = FORM_SUBMIT_ENDPOINT;
-    form.target = id;
-    form.acceptCharset = "utf-8";
-    form.style.display = "none";
-
-    Object.entries(fields).forEach(([name, value]) => {
-      form.appendChild(createHiddenInput(name, value));
-    });
-
-    document.body.appendChild(iframe);
-    document.body.appendChild(form);
-    form.submit();
-    window.setTimeout(() => {
-      form.remove();
-      iframe.remove();
-      resolve();
-    }, FORM_POST_SETTLE_DELAY);
+async function postToFormSubmit(fields) {
+  const response = await fetch(FORM_SUBMIT_ENDPOINT, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(fields),
   });
+
+  if (!response.ok) {
+    throw new Error(`FormSubmit returned ${response.status}`);
+  }
+
+  return response.json().catch(() => ({}));
 }
 
 function InterestForm({ type }) {
@@ -118,10 +96,15 @@ function InterestForm({ type }) {
           "Submitted From": "Hope's Safety Backpack website",
         };
 
-        await postToFormSubmit(submissionFields);
-        setMessage("Thank you. Your details were sent successfully.");
-        form.reset();
-        setIsSubmitting(false);
+        try {
+          await postToFormSubmit(submissionFields);
+          setMessage("Thank you. Your details were sent successfully.");
+          form.reset();
+        } catch {
+          setMessage("We could not send the form right now. Please email the team directly.");
+        } finally {
+          setIsSubmitting(false);
+        }
       }}
     >
       <div className="mb-6 flex items-center gap-2 rounded-[1rem] border-2 border-yellow-300/70 bg-yellow-100/80 p-3 font-extrabold text-yellow-900">
