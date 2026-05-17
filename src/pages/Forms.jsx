@@ -8,20 +8,8 @@ const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 const WEB3FORMS_ACCESS_KEY =
   typeof __WEB3FORMS_ACCESS_KEY__ === "string" ? __WEB3FORMS_ACCESS_KEY__.trim() : "";
 
-function getFormRedirectUrl() {
-  if (typeof window === "undefined") {
-    return "https://www.hopessafetybackpack.com/forms?submitted=success";
-  }
-
-  return `${window.location.origin}/forms?submitted=success`;
-}
-
 function InterestForm({ type }) {
-  const [message, setMessage] = useState(() =>
-    typeof window !== "undefined" && new URLSearchParams(window.location.search).get("submitted") === "success"
-      ? "Thank you. Your details were sent successfully."
-      : ""
-  );
+  const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isPreorder = type === "preorder";
   const formType = isPreorder ? "Backpack Preorder Interest" : "Helper Application Interest";
@@ -31,9 +19,12 @@ function InterestForm({ type }) {
       action={WEB3FORMS_ENDPOINT}
       className="kid-paper rounded-[2rem] border-4 border-dashed border-safety-blue/35 p-6 shadow-soft sm:p-7"
       method="POST"
-      onSubmit={(event) => {
+      onSubmit={async (event) => {
+        event.preventDefault();
+
         const form = event.currentTarget;
         const formData = new FormData(form);
+        const parentName = String(formData.get("name") || "").trim();
         const email = String(formData.get("email") || "").trim();
         const botcheck = formData.get("botcheck");
 
@@ -45,25 +36,45 @@ function InterestForm({ type }) {
         }
 
         if (!email) {
-          event.preventDefault();
           setMessage("Please add an email address so we can send your details.");
           return;
         }
 
         if (!WEB3FORMS_ACCESS_KEY) {
-          event.preventDefault();
           setMessage("We could not send the form right now. Please email the team directly.");
           return;
         }
 
+        formData.set("access_key", WEB3FORMS_ACCESS_KEY);
+        formData.set("Parent or Guardian", parentName || "Not provided");
+        formData.set("Notes", String(formData.get("message") || "").trim() || "No notes were added.");
+
         setIsSubmitting(true);
         setMessage("");
+
+        try {
+          const response = await fetch(WEB3FORMS_ENDPOINT, {
+            method: "POST",
+            body: formData,
+          });
+          const result = await response.json().catch(() => ({}));
+
+          if (!response.ok || result.success !== true) {
+            throw new Error(result.message || "Web3Forms did not confirm delivery.");
+          }
+
+          setMessage("Thank you. Your details were sent successfully.");
+          form.reset();
+        } catch {
+          setMessage("We could not send the form right now. Please email the team directly.");
+        } finally {
+          setIsSubmitting(false);
+        }
       }}
     >
       <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
       <input type="hidden" name="subject" value={`Hope's Safety Backpack: ${formType}`} />
       <input type="hidden" name="from_name" value="Hope's Safety Backpack Website" />
-      <input type="hidden" name="redirect" value={getFormRedirectUrl()} />
       <input type="hidden" name="Form Type" value={formType} />
       <input type="hidden" name="Submitted From" value="Hope's Safety Backpack website" />
 
@@ -75,7 +86,7 @@ function InterestForm({ type }) {
       <div className="grid gap-4 md:grid-cols-2">
         <label className="grid gap-2 text-sm font-black text-ink">
           Parent or Guardian Name
-          <input className="min-h-12 rounded-xl border-2 border-command/10 bg-white px-3 text-body transition focus:border-safety-blue focus:shadow-[0_0_0_3px_rgb(21_94_239/0.12)]" type="text" name="Parent or Guardian" placeholder="Enter full name" autoComplete="name" required />
+          <input className="min-h-12 rounded-xl border-2 border-command/10 bg-white px-3 text-body transition focus:border-safety-blue focus:shadow-[0_0_0_3px_rgb(21_94_239/0.12)]" type="text" name="name" placeholder="Enter full name" autoComplete="name" required />
         </label>
         <label className="grid gap-2 text-sm font-black text-ink">
           Email Address
@@ -126,7 +137,7 @@ function InterestForm({ type }) {
         Notes
         <textarea
           className="min-h-32 resize-y rounded-xl border-2 border-command/10 bg-white px-3 py-3 text-body transition focus:border-safety-blue focus:shadow-[0_0_0_3px_rgb(21_94_239/0.12)]"
-          name="Notes"
+          name="message"
           placeholder={isPreorder ? "Any preorder questions or timing notes?" : "Why would you like to be a helper?"}
         />
       </label>
